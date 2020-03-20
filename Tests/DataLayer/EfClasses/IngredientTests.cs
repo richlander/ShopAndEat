@@ -2,6 +2,7 @@
 using DataLayer.Core;
 using DataLayer.EfClasses;
 using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 
 namespace Tests.DataLayer.EfClasses
@@ -15,7 +16,7 @@ namespace Tests.DataLayer.EfClasses
         {
             var name = "Salat";
             var ingredientGroup = new IngredientGroup("Gemüse");
-            var unit = Unit.Liter;
+            var unit = new Mock<IUnit>().Object;
             var isInventory = true;
 
             var testee = new Ingredient(name, ingredientGroup, unit, isInventory);

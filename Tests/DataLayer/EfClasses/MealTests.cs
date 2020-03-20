@@ -14,7 +14,7 @@ namespace Tests.DataLayer.EfClasses
         public void CreateMeal()
         {
             var day = new DateTime();
-            var mealType = MealType.Lunch;
+            var mealType = new Mock<IMealType>().Object;
             var recipe = new Mock<IRecipe>().Object;
 
             var testee = new Meal(day, mealType, recipe);

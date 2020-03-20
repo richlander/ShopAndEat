@@ -6,7 +6,7 @@ namespace DataLayer.EfClasses
     {
         public Ingredient(string name,
                           IIngredientGroup ingredientGroup,
-                          Unit unit,
+                          IUnit unit,
                           in bool isInventory)
         {
             Name = name;
@@ -19,7 +19,7 @@ namespace DataLayer.EfClasses
 
         public IIngredientGroup IngredientGroup { get; }
 
-        public Unit Unit { get; }
+        public IUnit Unit { get; }
 
         public bool IsInventory { get; }
     }

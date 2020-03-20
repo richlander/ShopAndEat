@@ -5,7 +5,7 @@ namespace DataLayer.EfClasses
 {
     public class Meal : IMeal
     {
-        public Meal(in DateTime day, MealType mealType, IRecipe recipe)
+        public Meal(in DateTime day, IMealType mealType, IRecipe recipe)
         {
             Day = day;
             MealType = mealType;
@@ -14,7 +14,7 @@ namespace DataLayer.EfClasses
 
         public DateTime Day { get; }
 
-        public MealType MealType { get; }
+        public IMealType MealType { get; }
 
         public IRecipe Recipe { get; }
     }

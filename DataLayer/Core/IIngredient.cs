@@ -8,7 +8,7 @@ namespace DataLayer.Core
 
         IIngredientGroup IngredientGroup { get; }
 
-        Unit Unit { get; }
+        IUnit Unit { get; }
 
         bool IsInventory { get; }
     }

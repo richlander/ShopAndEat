@@ -6,7 +6,7 @@ namespace DataLayer.Core
     {
         DateTime Day { get; }
 
-        MealType MealType { get; }
+        IMealType MealType { get; }
 
         IRecipe Recipe { get; }
     }
