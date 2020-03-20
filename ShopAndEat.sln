@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{D7476D40-81E4-4842-8C93-EF21A1A0F021}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{2E0FD0BC-63CE-41B7-B45C-BA04F55E352B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{2E0FD0BC-63CE-41B7-B45C-BA04F55E352B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizLogic", "BizLogic\BizLogic.csproj", "{E32B00E9-7B13-415F-BAD8-28EC5F81014E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2E0FD0BC-63CE-41B7-B45C-BA04F55E352B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E0FD0BC-63CE-41B7-B45C-BA04F55E352B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E0FD0BC-63CE-41B7-B45C-BA04F55E352B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E32B00E9-7B13-415F-BAD8-28EC5F81014E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E32B00E9-7B13-415F-BAD8-28EC5F81014E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E32B00E9-7B13-415F-BAD8-28EC5F81014E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E32B00E9-7B13-415F-BAD8-28EC5F81014E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
