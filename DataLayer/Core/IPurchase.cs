@@ -9,6 +9,6 @@ namespace DataLayer.Core
 
         DateTime To { get; }
 
-        IReadOnlyCollection<(IIngredient, int)> Ingredients { get; }
+        IReadOnlyCollection<(IIngredient, int)> Components { get; }
     }
 }

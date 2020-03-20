@@ -16,13 +16,13 @@ namespace Tests.DataLayer.EfClasses
         {
             var from = new DateTime();
             var to = new DateTime();
-            var ingredients = new Collection<(IIngredient, int)> { (new Mock<IIngredient>().Object, 3) };
+            var components = new Collection<(IIngredient, int)> { (new Mock<IIngredient>().Object, 3) };
 
-            var testee = new Purchase(from, to, ingredients);
+            var testee = new Purchase(from, to, components);
 
             testee.From.Should().Be(from);
             testee.To.Should().Be(to);
-            testee.Ingredients.Should().BeEquivalentTo(ingredients);
+            testee.Components.Should().BeEquivalentTo(components);
         }
     }
 }

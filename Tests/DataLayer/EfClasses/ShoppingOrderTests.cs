@@ -16,12 +16,11 @@ namespace Tests.DataLayer.EfClasses
             var ingredientGroup = new Mock<IIngredientGroup>().Object;
             var location = new Mock<ILocation>().Object;
 
-            var testee = new ShoppingOrder(location,ingredientGroup,order);
+            var testee = new ShoppingOrder(location, ingredientGroup, order);
 
             testee.Location.Should().Be(location);
             testee.IngredientGroup.Should().Be(ingredientGroup);
             testee.Order.Should().Be(order);
-
         }
     }
 }

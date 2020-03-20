@@ -8,11 +8,11 @@ namespace DataLayer.EfClasses
 {
     public class Purchase : IPurchase
     {
-        private readonly IEnumerable<(IIngredient, int)> _ingredients;
+        private readonly IEnumerable<(IIngredient, int)> _components;
 
-        public Purchase(in DateTime from, in DateTime to, IEnumerable<(IIngredient, int)> ingredients)
+        public Purchase(in DateTime from, in DateTime to, IEnumerable<(IIngredient, int)> components)
         {
-            _ingredients = ingredients;
+            _components = components;
             From = from;
             To = to;
         }
@@ -21,6 +21,6 @@ namespace DataLayer.EfClasses
 
         public DateTime To { get; }
 
-        public IReadOnlyCollection<(IIngredient, int)> Ingredients => new ReadOnlyCollection<(IIngredient, int)>(_ingredients.ToList());
+        public IReadOnlyCollection<(IIngredient, int)> Components => new ReadOnlyCollection<(IIngredient, int)>(_components.ToList());
     }
 }
