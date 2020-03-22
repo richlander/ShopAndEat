@@ -7,5 +7,9 @@ namespace DataLayer.Core
         string Name { get; }
 
         IReadOnlyCollection<IShoppingOrder> Compartments { get; }
+
+        void AddCompartment(IShoppingOrder compartment);
+
+        void DeleteCompartment(IShoppingOrder compartment);
     }
 }
