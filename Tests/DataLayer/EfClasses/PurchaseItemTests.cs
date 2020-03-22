@@ -13,7 +13,7 @@ namespace Tests.DataLayer.EfClasses
         public void CreatePurchaseItem()
         {
             var article = new Mock<IArticle>().Object;
-            var quantity = 3;
+            uint quantity = 3;
             var unit = new Mock<IUnit>().Object;
 
             var testee = new PurchaseItem(article, quantity, unit);

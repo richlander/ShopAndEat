@@ -4,7 +4,7 @@
     {
         IArticle Article { get; }
 
-        int Quantity { get; }
+        uint Quantity { get; }
 
         IUnit Unit { get; }
     }

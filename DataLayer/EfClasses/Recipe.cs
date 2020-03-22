@@ -29,11 +29,11 @@ namespace DataLayer.EfClasses
         }
 
         /// <inheritdoc />
-        public void DeleteIngredient(IIngredient component)
+        public void DeleteIngredient(IIngredient ingredient)
         {
-            if (_ingredients.Contains(component))
+            if (_ingredients.Contains(ingredient))
             {
-                _ingredients.Remove(component);
+                _ingredients.Remove(ingredient);
             }
         }
     }
