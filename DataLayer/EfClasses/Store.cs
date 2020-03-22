@@ -2,9 +2,9 @@
 
 namespace DataLayer.EfClasses
 {
-    public class IngredientGroup : IIngredientGroup
+    public class Store : IStore
     {
-        public IngredientGroup(string name)
+        public Store(string name)
         {
             Name = name;
         }

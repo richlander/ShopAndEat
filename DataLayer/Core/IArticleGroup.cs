@@ -1,6 +1,6 @@
 ﻿namespace DataLayer.Core
 {
-    public interface ILocation
+    public interface IArticleGroup
     {
         string Name { get; }
     }

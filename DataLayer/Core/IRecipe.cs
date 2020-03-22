@@ -8,10 +8,10 @@ namespace DataLayer.Core
 
         int NumberOfDays { get; }
 
-        IReadOnlyCollection<(IIngredient, int)> Components { get; }
+        IReadOnlyCollection<IIngredient> Ingredients { get; }
 
-        void AddComponent((IIngredient, int) component);
+        void AddIngredient(IIngredient ingredient);
 
-        void DeleteComponent((IIngredient, int) component);
+        void DeleteIngredient(IIngredient ingredient);
     }
 }

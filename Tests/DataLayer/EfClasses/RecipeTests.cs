@@ -15,27 +15,27 @@ namespace Tests.DataLayer.EfClasses
         {
             var name = "Suppe";
             var numberOfDays = 3;
-            var components = new Collection<(IIngredient, int)> { (new Mock<IIngredient>().Object, 3) };
+            var ingredients = new Collection<IIngredient> { new Mock<IIngredient>().Object };
 
-            var testee = new Recipe(name, numberOfDays, components);
+            var testee = new Recipe(name, numberOfDays, ingredients);
 
             testee.Name.Should().Be(name);
             testee.NumberOfDays.Should().Be(numberOfDays);
-            testee.Components.Should().BeEquivalentTo(components);
+            testee.Ingredients.Should().BeEquivalentTo(ingredients);
         }
 
         [Test]
-        public void AddComponent()
+        public void AddIngredient()
         {
             var name = "Suppe";
             var numberOfDays = 3;
-            var components = new Collection<(IIngredient, int)> { (new Mock<IIngredient>().Object, 3) };
-            var testee = new Recipe(name, numberOfDays, components);
-            (IIngredient, int) componentToAdd = (new Mock<IIngredient>().Object, 0);
+            var ingredients = new Collection<IIngredient> { new Mock<IIngredient>().Object };
+            var testee = new Recipe(name, numberOfDays, ingredients);
+            var ingredientToAdd = new Mock<IIngredient>().Object;
 
-            testee.AddComponent(componentToAdd);
+            testee.AddIngredient(ingredientToAdd);
 
-            testee.Components.Should().Contain(componentToAdd);
+            testee.Ingredients.Should().Contain(ingredientToAdd);
         }
 
         [Test]
@@ -43,13 +43,13 @@ namespace Tests.DataLayer.EfClasses
         {
             var name = "Suppe";
             var numberOfDays = 3;
-            var component = (new Mock<IIngredient>().Object, 3);
-            var ingredients = new Collection<(IIngredient, int)> { component };
+            var ingredient = new Mock<IIngredient>().Object;
+            var ingredients = new Collection<IIngredient> { ingredient };
             var testee = new Recipe(name, numberOfDays, ingredients);
 
-            testee.DeleteComponent(component);
+            testee.DeleteIngredient(ingredient);
 
-            testee.Components.Should().NotContain(component);
+            testee.Ingredients.Should().NotContain(ingredient);
         }
     }
 }

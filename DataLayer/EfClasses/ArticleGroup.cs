@@ -2,9 +2,9 @@
 
 namespace DataLayer.EfClasses
 {
-    public class Location : ILocation
+    public class ArticleGroup : IArticleGroup
     {
-        public Location(string name)
+        public ArticleGroup(string name)
         {
             Name = name;
         }

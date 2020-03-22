@@ -7,16 +7,16 @@ using NUnit.Framework;
 namespace Tests.DataLayer.EfClasses
 {
     [TestFixture]
-    public class IngredientTests
+    public class PurchaseItemTests
     {
         [Test]
-        public void CreateIngredient()
+        public void CreatePurchaseItem()
         {
             var article = new Mock<IArticle>().Object;
             var quantity = 3;
             var unit = new Mock<IUnit>().Object;
 
-            var testee = new Ingredient(article, quantity, unit);
+            var testee = new PurchaseItem(article, quantity, unit);
 
             testee.Article.Should().Be(article);
             testee.Quantity.Should().Be(quantity);

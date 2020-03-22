@@ -2,9 +2,9 @@
 {
     public interface IShoppingOrder
     {
-        ILocation Location { get; }
+        IStore Store { get; }
 
-        IIngredientGroup IngredientGroup { get; }
+        IArticleGroup ArticleGroup { get; }
 
         int Order { get; }
     }

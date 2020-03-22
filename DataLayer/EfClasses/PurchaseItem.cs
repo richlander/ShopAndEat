@@ -2,9 +2,9 @@
 
 namespace DataLayer.EfClasses
 {
-    public class Ingredient : IIngredient
+    public class PurchaseItem : IPurchaseItem
     {
-        public Ingredient(IArticle article, in int quantity, IUnit unit)
+        public PurchaseItem(IArticle article, int quantity, IUnit unit)
         {
             Article = article;
             Quantity = quantity;

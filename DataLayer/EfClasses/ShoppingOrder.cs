@@ -4,16 +4,16 @@ namespace DataLayer.EfClasses
 {
     public class ShoppingOrder : IShoppingOrder
     {
-        public ShoppingOrder(ILocation location, IIngredientGroup ingredientGroup, in int order)
+        public ShoppingOrder(IStore store, IArticleGroup articleGroup, in int order)
         {
-            Location = location;
-            IngredientGroup = ingredientGroup;
+            Store = store;
+            ArticleGroup = articleGroup;
             Order = order;
         }
 
-        public ILocation Location { get; }
+        public IStore Store { get; }
 
-        public IIngredientGroup IngredientGroup { get; }
+        public IArticleGroup ArticleGroup { get; }
 
         public int Order { get; }
     }

@@ -7,11 +7,11 @@ namespace DataLayer.EfClasses
 {
     public class Recipe : IRecipe
     {
-        private readonly List<(IIngredient, int)> _components;
+        private readonly List<IIngredient> _ingredients;
 
-        public Recipe(string name, in int numberOfDays, IEnumerable<(IIngredient, int)> components)
+        public Recipe(string name, in int numberOfDays, IEnumerable<IIngredient> ingredients)
         {
-            _components = components.ToList();
+            _ingredients = ingredients.ToList();
             Name = name;
             NumberOfDays = numberOfDays;
         }
@@ -20,20 +20,20 @@ namespace DataLayer.EfClasses
 
         public int NumberOfDays { get; }
 
-        public IReadOnlyCollection<(IIngredient, int)> Components => new ReadOnlyCollection<(IIngredient, int)>(_components.ToList());
+        public IReadOnlyCollection<IIngredient> Ingredients => new ReadOnlyCollection<IIngredient>(_ingredients.ToList());
 
         /// <inheritdoc />
-        public void AddComponent((IIngredient, int) component)
+        public void AddIngredient(IIngredient ingredient)
         {
-            _components.Add(component);
+            _ingredients.Add(ingredient);
         }
 
         /// <inheritdoc />
-        public void DeleteComponent((IIngredient, int) component)
+        public void DeleteIngredient(IIngredient component)
         {
-            if (_components.Contains(component))
+            if (_ingredients.Contains(component))
             {
-                _components.Remove(component);
+                _ingredients.Remove(component);
             }
         }
     }

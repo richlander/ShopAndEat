@@ -5,14 +5,14 @@ using NUnit.Framework;
 namespace Tests.DataLayer.EfClasses
 {
     [TestFixture]
-    public class IngredientGroupTests
+    public class ArticleGroupTests
     {
         [Test]
-        public void CreateIngredientGroup()
+        public void CreateArticleGroup()
         {
             var name = "Gemüse";
 
-            var testee = new IngredientGroup(name);
+            var testee = new ArticleGroup(name);
 
             testee.Name.Should().Be(name);
         }

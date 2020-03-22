@@ -1,6 +1,6 @@
 ﻿namespace DataLayer.Core
 {
-    public interface IIngredient
+    public interface IPurchaseItem
     {
         IArticle Article { get; }
 

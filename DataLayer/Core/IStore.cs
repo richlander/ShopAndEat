@@ -1,6 +1,6 @@
 ﻿namespace DataLayer.Core
 {
-    public interface IIngredientGroup
+    public interface IStore
     {
         string Name { get; }
     }
