@@ -1,4 +1,5 @@
 ﻿using DataLayer.Core;
+using JetBrains.Annotations;
 
 namespace DataLayer.EfClasses
 {
@@ -9,6 +10,13 @@ namespace DataLayer.EfClasses
             Name = name;
         }
 
+        [UsedImplicitly]
+        private ArticleGroup()
+        {
+        }
+
         public string Name { get; }
+
+        public int ArticleGroupId { get; [UsedImplicitly] private set; }
     }
 }
