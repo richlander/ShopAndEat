@@ -1,8 +1,6 @@
-﻿using DataLayer.Core;
-
-namespace DataLayer.EfClasses
+﻿namespace DataLayer.EfClasses
 {
-    public class Unit : IUnit
+    public class Unit
     {
         public Unit(string name)
         {

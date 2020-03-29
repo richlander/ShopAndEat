@@ -2,7 +2,7 @@
 using AutoMapper;
 using DataLayer.EF;
 using DataLayer.EfClasses;
-using ServiceLayer.DTO.ArticleGroup;
+using DTO.ArticleGroup;
 
 namespace ServiceLayer.Concrete
 {

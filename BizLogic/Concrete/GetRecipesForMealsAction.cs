@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataLayer.Core;
+using DataLayer.EfClasses;
 
 namespace BizLogic.Concrete
 {
     public class GetRecipesForMealsAction : IGetRecipesForMealsAction
     {
         /// <inheritdoc />
-        public IEnumerable<IRecipe> GetRecipesForMeals(IEnumerable<IMeal> meals)
+        public IEnumerable<Recipe> GetRecipesForMeals(IEnumerable<Meal> meals)
         {
             return meals.Select(x => x.Recipe);
         }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataLayer.Core;
 using DataLayer.EfClasses;
 
 namespace BizLogic.Concrete
@@ -8,7 +7,7 @@ namespace BizLogic.Concrete
     public class GeneratePurchaseItemsForRecipesAction : IGeneratePurchaseItemsForRecipesAction
     {
         /// <inheritdoc />
-        public IEnumerable<IPurchaseItem> GeneratePurchaseItems(IEnumerable<IRecipe> recipes)
+        public IEnumerable<PurchaseItem> GeneratePurchaseItems(IEnumerable<Recipe> recipes)
         {
             return recipes.Select(recipe => recipe.Ingredients)
                           .SelectMany(ingredients => ingredients)

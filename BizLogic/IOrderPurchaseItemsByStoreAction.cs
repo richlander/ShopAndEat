@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using DataLayer.Core;
+using DataLayer.EfClasses;
 
 namespace BizLogic
 {
     public interface IOrderPurchaseItemsByStoreAction
     {
-        IEnumerable<IPurchaseItem> OrderPurchaseItemsByStore(IStore store, IEnumerable<IPurchaseItem> purchaseItems);
+        IEnumerable<PurchaseItem> OrderPurchaseItemsByStore(Store store, IEnumerable<PurchaseItem> purchaseItems);
     }
 }

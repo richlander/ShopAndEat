@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataLayer.Core;
+using DataLayer.EfClasses;
 
 namespace BizLogic.Concrete
 {
     public class OrderPurchaseItemsByStoreAction : IOrderPurchaseItemsByStoreAction
     {
-        public IEnumerable<IPurchaseItem> OrderPurchaseItemsByStore(IStore store, IEnumerable<IPurchaseItem> purchaseItems)
+        public IEnumerable<PurchaseItem> OrderPurchaseItemsByStore(Store store, IEnumerable<PurchaseItem> purchaseItems)
         {
             return store.Compartments.Join(purchaseItems,
                                            shoppingOrder => shoppingOrder.ArticleGroup,

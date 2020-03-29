@@ -1,9 +1,8 @@
-﻿using DataLayer.Core;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace DataLayer.EfClasses
 {
-    public class ArticleGroup : IArticleGroup
+    public class ArticleGroup
     {
         public ArticleGroup(string name)
         {

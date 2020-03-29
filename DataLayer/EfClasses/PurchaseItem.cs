@@ -1,19 +1,17 @@
-﻿using DataLayer.Core;
-
-namespace DataLayer.EfClasses
+﻿namespace DataLayer.EfClasses
 {
-    public class PurchaseItem : IPurchaseItem
+    public class PurchaseItem
     {
-        public PurchaseItem(IArticle article, uint quantity, IUnit unit)
+        public PurchaseItem(Article article, uint quantity, Unit unit)
         {
             Article = article;
             Quantity = quantity;
             Unit = unit;
         }
 
-        public IArticle Article { get; }
+        public Article Article { get; }
 
-        public IUnit Unit { get; }
+        public Unit Unit { get; }
 
         public uint Quantity { get; }
     }

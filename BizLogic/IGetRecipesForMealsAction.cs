@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using DataLayer.Core;
+using DataLayer.EfClasses;
 
 namespace BizLogic
 {
     public interface IGetRecipesForMealsAction
     {
-        IEnumerable<IRecipe> GetRecipesForMeals(IEnumerable<IMeal> meals);
+        IEnumerable<Recipe> GetRecipesForMeals(IEnumerable<Meal> meals);
     }
 }

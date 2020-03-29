@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using DataLayer.Core;
+using DataLayer.EfClasses;
 
 namespace BizLogic
 {
     public interface IGeneratePurchaseItemsForRecipesAction
     {
-        IEnumerable<IPurchaseItem> GeneratePurchaseItems(IEnumerable<IRecipe> recipes);
+        IEnumerable<PurchaseItem> GeneratePurchaseItems(IEnumerable<Recipe> recipes);
     }
 }

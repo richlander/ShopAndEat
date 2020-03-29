@@ -1,4 +1,4 @@
-﻿using ServiceLayer.DTO.ArticleGroup;
+﻿using DTO.ArticleGroup;
 
 namespace ServiceLayer
 {

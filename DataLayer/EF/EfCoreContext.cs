@@ -11,5 +11,7 @@ namespace DataLayer.EF
         }
 
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
+
+        public DbSet<Article> Articles { get; set; }
     }
 }

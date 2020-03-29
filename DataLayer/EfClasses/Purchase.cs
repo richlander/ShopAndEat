@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using DataLayer.Core;
 
 namespace DataLayer.EfClasses
 {
-    public class Purchase : IPurchase
+    public class Purchase
     {
-        private readonly List<IPurchaseItem> _purchaseItems;
+        private readonly List<PurchaseItem> _purchaseItems;
 
-        public Purchase(in DateTime from, in DateTime to, IEnumerable<IPurchaseItem> purchaseItems)
+        public Purchase(in DateTime from, in DateTime to, IEnumerable<PurchaseItem> purchaseItems)
         {
             _purchaseItems = purchaseItems.ToList();
             From = from;
@@ -21,6 +20,6 @@ namespace DataLayer.EfClasses
 
         public DateTime To { get; }
 
-        public IReadOnlyCollection<IPurchaseItem> PurchaseItems => new ReadOnlyCollection<IPurchaseItem>(_purchaseItems);
+        public IReadOnlyCollection<PurchaseItem> PurchaseItems => new ReadOnlyCollection<PurchaseItem>(_purchaseItems);
     }
 }

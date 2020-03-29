@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using DataLayer.Core;
 
 namespace DataLayer.EfClasses
 {
-    public class Recipe : IRecipe
+    public class Recipe
     {
-        private readonly List<IIngredient> _ingredients;
+        private readonly List<Ingredient> _ingredients;
 
-        public Recipe(string name, in int numberOfDays, IEnumerable<IIngredient> ingredients)
+        public Recipe(string name, in int numberOfDays, IEnumerable<Ingredient> ingredients)
         {
             _ingredients = ingredients.ToList();
             Name = name;
@@ -20,16 +19,14 @@ namespace DataLayer.EfClasses
 
         public int NumberOfDays { get; }
 
-        public IReadOnlyCollection<IIngredient> Ingredients => new ReadOnlyCollection<IIngredient>(_ingredients.ToList());
+        public IReadOnlyCollection<Ingredient> Ingredients => new ReadOnlyCollection<Ingredient>(_ingredients.ToList());
 
-        /// <inheritdoc />
-        public void AddIngredient(IIngredient ingredient)
+        public void AddIngredient(Ingredient ingredient)
         {
             _ingredients.Add(ingredient);
         }
 
-        /// <inheritdoc />
-        public void DeleteIngredient(IIngredient ingredient)
+        public void DeleteIngredient(Ingredient ingredient)
         {
             if (_ingredients.Contains(ingredient))
             {

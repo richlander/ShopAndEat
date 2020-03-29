@@ -1,8 +1,6 @@
-﻿using DataLayer.Core;
-
-namespace DataLayer.EfClasses
+﻿namespace DataLayer.EfClasses
 {
-    public class MealType:IMealType
+    public class MealType
     {
         public MealType(string name)
         {

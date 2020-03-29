@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using DataLayer.Core;
 
 namespace DataLayer.EfClasses
 {
-    public class Store : IStore
+    public class Store
     {
-        private readonly List<IShoppingOrder> _compartments;
+        private readonly List<ShoppingOrder> _compartments;
 
-        public Store(string name, IEnumerable<IShoppingOrder> compartments)
+        public Store(string name, IEnumerable<ShoppingOrder> compartments)
         {
             _compartments = compartments.ToList();
             Name = name;
@@ -18,10 +17,9 @@ namespace DataLayer.EfClasses
 
         public string Name { get; }
 
-        public IReadOnlyCollection<IShoppingOrder> Compartments => new ReadOnlyCollection<IShoppingOrder>(_compartments);
+        public IReadOnlyCollection<ShoppingOrder> Compartments => new ReadOnlyCollection<ShoppingOrder>(_compartments);
 
-        /// <inheritdoc />
-        public void AddCompartment(IShoppingOrder compartment)
+        public void AddCompartment(ShoppingOrder compartment)
         {
             if (_compartments.Any(x => x.Order == compartment.Order))
             {
@@ -33,8 +31,7 @@ namespace DataLayer.EfClasses
             }
         }
 
-        /// <inheritdoc />
-        public void DeleteCompartment(IShoppingOrder compartment)
+        public void DeleteCompartment(ShoppingOrder compartment)
         {
             if (_compartments.Contains(compartment))
             {

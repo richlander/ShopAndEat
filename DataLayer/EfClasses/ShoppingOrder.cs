@@ -1,16 +1,14 @@
-﻿using DataLayer.Core;
-
-namespace DataLayer.EfClasses
+﻿namespace DataLayer.EfClasses
 {
-    public class ShoppingOrder : IShoppingOrder
+    public class ShoppingOrder
     {
-        public ShoppingOrder(IArticleGroup articleGroup, in int order)
+        public ShoppingOrder(ArticleGroup articleGroup, in int order)
         {
             ArticleGroup = articleGroup;
             Order = order;
         }
 
-        public IArticleGroup ArticleGroup { get; }
+        public ArticleGroup ArticleGroup { get; }
 
         public int Order { get; }
     }
