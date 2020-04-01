@@ -1,4 +1,5 @@
-﻿using BizLogic;
+﻿using System.Collections.Generic;
+using BizLogic;
 using DataLayer.EF;
 using DTO.Article;
 
@@ -16,16 +17,24 @@ namespace ServiceLayer.Concrete
 
         private EfCoreContext Context { get; }
 
-        public void CreateArticle(NewArticleDto newArticleDto)
+        public ExistingArticleDto CreateArticle(NewArticleDto newArticleDto)
         {
-            ArticleAction.CreateArticle(newArticleDto);
+            var createdArticle = ArticleAction.CreateArticle(newArticleDto);
             Context.SaveChanges();
+
+            return createdArticle;
         }
 
         public void DeleteArticle(DeleteArticleDto deleteArticleDto)
         {
             ArticleAction.DeleteArticle(deleteArticleDto);
             Context.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<ExistingArticleDto> GetAllArticles()
+        {
+            return ArticleAction.GetAllArticles();
         }
     }
 }

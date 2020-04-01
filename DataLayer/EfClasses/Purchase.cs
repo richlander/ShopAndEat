@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace DataLayer.EfClasses
 {
@@ -9,11 +10,16 @@ namespace DataLayer.EfClasses
     {
         private readonly List<PurchaseItem> _purchaseItems;
 
-        public Purchase(in DateTime from, in DateTime to, IEnumerable<PurchaseItem> purchaseItems)
+        public Purchase(DateTime from, DateTime to, IEnumerable<PurchaseItem> purchaseItems)
         {
             _purchaseItems = purchaseItems.ToList();
             From = from;
             To = to;
+        }
+
+        [UsedImplicitly]
+        private Purchase()
+        {
         }
 
         public DateTime From { get; }
@@ -21,5 +27,7 @@ namespace DataLayer.EfClasses
         public DateTime To { get; }
 
         public IReadOnlyCollection<PurchaseItem> PurchaseItems => new ReadOnlyCollection<PurchaseItem>(_purchaseItems);
+
+        public int PurchaseId { get; [UsedImplicitly] private set; }
     }
 }

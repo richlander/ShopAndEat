@@ -36,5 +36,16 @@ namespace Tests.UnitTests.BizLogic
 
             articleDbAccessMock.Verify(x => x.DeleteArticle(It.Is<Article>(a => a.Name == "Cheese")), Times.Once);
         }
+
+        [Test]
+        public void GetAllArticles()
+        {
+            var articleDbAccessMock = new Mock<IArticleDbAccess>();
+            var testee = new ArticleAction(articleDbAccessMock.Object, new Mapper().CreateMapper());
+
+            testee.GetAllArticles();
+
+            articleDbAccessMock.Verify(x => x.GetArticles(), Times.Once);
+        }
     }
 }

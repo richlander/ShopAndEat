@@ -1,4 +1,6 @@
-﻿namespace DataLayer.EfClasses
+﻿using JetBrains.Annotations;
+
+namespace DataLayer.EfClasses
 {
     public class PurchaseItem
     {
@@ -9,10 +11,17 @@
             Unit = unit;
         }
 
+        [UsedImplicitly]
+        private PurchaseItem()
+        {
+        }
+
         public Article Article { get; }
 
         public Unit Unit { get; }
 
         public uint Quantity { get; }
+
+        public int PurchaseItemId { get; [UsedImplicitly] private set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
-using DataLayer.EF;
+﻿using System.Collections.Generic;
 using DataLayer.EfClasses;
 using DTO.ArticleGroup;
 
@@ -8,30 +6,29 @@ namespace ServiceLayer.Concrete
 {
     public class ArticleGroupService : IArticleGroupService
     {
-        public ArticleGroupService(EfCoreContext dbContext, IMapper mapper)
+        public ArticleGroupService(SimpleCrudHelper simpleCrudHelper)
         {
-            DbContext = dbContext;
-            Mapper = mapper;
+            SimpleCrudHelper = simpleCrudHelper;
         }
 
-        private EfCoreContext DbContext { get; }
-
-        private IMapper Mapper { get; }
+        private SimpleCrudHelper SimpleCrudHelper { get; }
 
         /// <inheritdoc />
-        public void Create(NewArticleGroupDto newArticleGroupDto)
+        public ExistingArticleGroupDto CreateArticleGroup(NewArticleGroupDto newArticleGroupDto)
         {
-            var articleGroup = Mapper.Map<ArticleGroup>(newArticleGroupDto);
-            DbContext.ArticleGroups.Add(articleGroup);
-            DbContext.SaveChanges();
+            return SimpleCrudHelper.Create<NewArticleGroupDto, ArticleGroup, ExistingArticleGroupDto>(newArticleGroupDto);
         }
 
         /// <inheritdoc />
-        public void Delete(DeleteArticleGroupDto deleteArticleGroupDto)
+        public void DeleteArticleGroup(DeleteArticleGroupDto deleteArticleGroupDto)
         {
-            var articleGroup = DbContext.ArticleGroups.Single(x => x.ArticleGroupId == deleteArticleGroupDto.ArticleGroupId);
-            DbContext.ArticleGroups.Remove(articleGroup);
-            DbContext.SaveChanges();
+            SimpleCrudHelper.Delete<ArticleGroup>(deleteArticleGroupDto.ArticleGroupId);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<ExistingArticleGroupDto> GetAllArticleGroups()
+        {
+            return SimpleCrudHelper.GetAll<ArticleGroup, ExistingArticleGroupDto>();
         }
     }
 }

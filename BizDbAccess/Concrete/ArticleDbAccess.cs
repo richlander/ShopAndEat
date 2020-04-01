@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DataLayer.EF;
 using DataLayer.EfClasses;
 
@@ -14,9 +15,9 @@ namespace BizDbAccess.Concrete
         private EfCoreContext Context { get; }
 
         /// <inheritdoc />
-        public void AddArticle(Article article)
+        public Article AddArticle(Article article)
         {
-            Context.Articles.Add(article);
+            return Context.Articles.Add(article).Entity;
         }
 
         /// <inheritdoc />
@@ -29,6 +30,12 @@ namespace BizDbAccess.Concrete
         public Article GetArticle(int articleId)
         {
             return Context.Articles.Single(x => x.ArticleId == articleId);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Article> GetArticles()
+        {
+            return Context.Articles;
         }
     }
 }

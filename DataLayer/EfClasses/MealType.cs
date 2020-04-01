@@ -1,4 +1,6 @@
-﻿namespace DataLayer.EfClasses
+﻿using JetBrains.Annotations;
+
+namespace DataLayer.EfClasses
 {
     public class MealType
     {
@@ -7,6 +9,13 @@
             Name = name;
         }
 
+        [UsedImplicitly]
+        private MealType()
+        {
+        }
+
         public string Name { get; }
+
+        public int MealTypeId { get; [UsedImplicitly] private set; }
     }
 }

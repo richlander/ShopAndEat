@@ -1,14 +1,20 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace DataLayer.EfClasses
 {
     public class Meal
     {
-        public Meal(in DateTime day, MealType mealType, Recipe recipe)
+        public Meal(DateTime day, MealType mealType, Recipe recipe)
         {
             Day = day;
             MealType = mealType;
             Recipe = recipe;
+        }
+
+        [UsedImplicitly]
+        private Meal()
+        {
         }
 
         public DateTime Day { get; }
@@ -16,5 +22,7 @@ namespace DataLayer.EfClasses
         public MealType MealType { get; }
 
         public Recipe Recipe { get; }
+
+        public int MealId { get; [UsedImplicitly] private set; }
     }
 }

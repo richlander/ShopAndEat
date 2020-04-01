@@ -35,5 +35,17 @@ namespace Tests.UnitTests.ServiceLayer
 
             articleActionMock.Verify(x => x.DeleteArticle(deleteArticleGroupDto), Times.Once);
         }
+
+        [Test]
+        public void GetAllArticles()
+        {
+            using var context = new InMemoryDbContext();
+            var articleActionMock = new Mock<IArticleAction>();
+            var testee = new ArticleService(articleActionMock.Object, context);
+
+            testee.GetAllArticles();
+
+            articleActionMock.Verify(x => x.GetAllArticles(), Times.Once);
+        }
     }
 }

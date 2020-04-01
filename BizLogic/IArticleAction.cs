@@ -1,11 +1,14 @@
-﻿using DTO.Article;
+﻿using System.Collections.Generic;
+using DTO.Article;
 
 namespace BizLogic
 {
     public interface IArticleAction
     {
-        void CreateArticle(NewArticleDto newArticleDto);
+        ExistingArticleDto CreateArticle(NewArticleDto newArticleDto);
 
         void DeleteArticle(DeleteArticleDto deleteArticleDto);
+
+        IEnumerable<ExistingArticleDto> GetAllArticles();
     }
 }

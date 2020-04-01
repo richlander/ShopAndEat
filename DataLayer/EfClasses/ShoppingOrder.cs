@@ -1,4 +1,6 @@
-﻿namespace DataLayer.EfClasses
+﻿using JetBrains.Annotations;
+
+namespace DataLayer.EfClasses
 {
     public class ShoppingOrder
     {
@@ -8,8 +10,15 @@
             Order = order;
         }
 
+        [UsedImplicitly]
+        private ShoppingOrder()
+        {
+        }
+
         public ArticleGroup ArticleGroup { get; }
 
         public int Order { get; }
+
+        public int ShoppingOrderId { get; [UsedImplicitly] private set; }
     }
 }

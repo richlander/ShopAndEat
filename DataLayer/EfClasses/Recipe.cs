@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace DataLayer.EfClasses
 {
@@ -15,11 +16,18 @@ namespace DataLayer.EfClasses
             NumberOfDays = numberOfDays;
         }
 
+        [UsedImplicitly]
+        private Recipe()
+        {
+        }
+
         public string Name { get; }
 
         public int NumberOfDays { get; }
 
         public IReadOnlyCollection<Ingredient> Ingredients => new ReadOnlyCollection<Ingredient>(_ingredients.ToList());
+
+        public int RecipeId { get; [UsedImplicitly] private set; }
 
         public void AddIngredient(Ingredient ingredient)
         {

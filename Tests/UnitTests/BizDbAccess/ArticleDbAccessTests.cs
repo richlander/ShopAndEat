@@ -23,6 +23,20 @@ namespace Tests.UnitTests.BizDbAccess
         }
 
         [Test]
+        public void GetArticles()
+        {
+            using var inMemoryDbContext = new InMemoryDbContext();
+            var vegetables = inMemoryDbContext.ArticleGroups.Add(new ArticleGroup("Vegetables"));
+            inMemoryDbContext.Articles.Add(new Article("Tomato", vegetables.Entity, false));
+            inMemoryDbContext.SaveChanges();
+            var testee = new ArticleDbAccess(inMemoryDbContext);
+
+            var result = testee.GetArticles();
+
+            result.Should().Contain(x => x.Name == "Tomato");
+        }
+
+        [Test]
         public void CreateArticle()
         {
             using var inMemoryDbContext = new InMemoryDbContext();

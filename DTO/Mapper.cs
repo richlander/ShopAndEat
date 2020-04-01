@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using DTO.Article;
 using DTO.ArticleGroup;
+using DTO.Ingredient;
+using DTO.MealType;
+using DTO.PurchaseItem;
+using DTO.Unit;
 
 namespace DTO
 {
@@ -11,8 +15,28 @@ namespace DTO
             var configuration = new MapperConfiguration(config =>
             {
                 config.CreateMap<NewArticleGroupDto, DataLayer.EfClasses.ArticleGroup>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<ExistingArticleGroupDto, DataLayer.EfClasses.ArticleGroup>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                config.CreateMap<NewMealTypeDto, DataLayer.EfClasses.MealType>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                config.CreateMap<NewUnitDto, DataLayer.EfClasses.Unit>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                config.CreateMap<NewIngredientDto, DataLayer.EfClasses.Ingredient>().IgnoreAllPropertiesWithAnInaccessibleSetter();
                 config.CreateMap<NewArticleDto, DataLayer.EfClasses.Article>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                config.CreateMap<NewPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+
+                config.CreateMap<ExistingArticleGroupDto, DataLayer.EfClasses.ArticleGroup>()
+                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                      .ReverseMap();
+                config.CreateMap<ExistingMealTypeDto, DataLayer.EfClasses.MealType>()
+                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                      .ReverseMap();
+                config.CreateMap<ExistingUnitDto, DataLayer.EfClasses.Unit>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+                config.CreateMap<ExistingArticleDto, DataLayer.EfClasses.Article>()
+                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                      .ReverseMap();
+                config.CreateMap<ExistingIngredientDto, DataLayer.EfClasses.Ingredient>()
+                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                      .ReverseMap();
+                config.CreateMap<ExistingPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>()
+                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                      .ReverseMap();
             });
             configuration.AssertConfigurationIsValid();
 

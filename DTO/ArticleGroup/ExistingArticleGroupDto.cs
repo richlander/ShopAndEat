@@ -2,7 +2,7 @@
 {
     public class ExistingArticleGroupDto
     {
-        public ExistingArticleGroupDto(in int articleGroupId, string name)
+        public ExistingArticleGroupDto(int articleGroupId, string name)
         {
             ArticleGroupId = articleGroupId;
             Name = name;
