@@ -23,5 +23,9 @@ namespace DataLayer.EF
         public DbSet<PurchaseItem> PurchaseItems { get; set; }
 
         public DbSet<Purchase> Purchases { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }
+
+        public DbSet<Meal> Meals { get; set; }
     }
 }

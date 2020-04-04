@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataLayer.EF;
 
@@ -33,12 +34,24 @@ namespace ServiceLayer.Concrete
             DbContext.SaveChanges();
         }
 
-        public IEnumerable<TDtoOut> GetAll<TIn, TDtoOut>()
+        public IEnumerable<TDtoOut> GetAllAsDto<TIn, TDtoOut>()
             where TIn : class
         {
             var allEntities = DbContext.Set<TIn>();
 
             return Mapper.Map<IEnumerable<TDtoOut>>(allEntities);
+        }
+
+        public IEnumerable<TOut> FindMany<TOut>(IEnumerable<int> ids)
+            where TOut : class
+        {
+            return ids.Select(id => DbContext.Set<TOut>().Find(id));
+        }
+
+        public TOut Find<TOut>(int id)
+            where TOut : class
+        {
+            return DbContext.Set<TOut>().Find(id);
         }
     }
 }

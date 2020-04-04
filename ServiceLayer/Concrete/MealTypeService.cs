@@ -28,7 +28,7 @@ namespace ServiceLayer.Concrete
         /// <inheritdoc />
         public IEnumerable<ExistingMealTypeDto> GetAllMealTypes()
         {
-            return SimpleCrudHelper.GetAll<MealType, ExistingMealTypeDto>();
+            return SimpleCrudHelper.GetAllAsDto<MealType, ExistingMealTypeDto>();
         }
     }
 }

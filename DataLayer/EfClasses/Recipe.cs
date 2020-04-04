@@ -9,7 +9,7 @@ namespace DataLayer.EfClasses
     {
         private readonly List<Ingredient> _ingredients;
 
-        public Recipe(string name, in int numberOfDays, IEnumerable<Ingredient> ingredients)
+        public Recipe(string name, int numberOfDays, IEnumerable<Ingredient> ingredients)
         {
             _ingredients = ingredients.ToList();
             Name = name;

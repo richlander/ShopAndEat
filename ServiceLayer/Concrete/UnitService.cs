@@ -28,7 +28,7 @@ namespace ServiceLayer.Concrete
         /// <inheritdoc />
         public IEnumerable<ExistingUnitDto> GetAllUnits()
         {
-            return SimpleCrudHelper.GetAll<Unit, ExistingUnitDto>();
+            return SimpleCrudHelper.GetAllAsDto<Unit, ExistingUnitDto>();
         }
     }
 }

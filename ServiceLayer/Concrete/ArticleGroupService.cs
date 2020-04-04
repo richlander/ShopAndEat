@@ -28,7 +28,7 @@ namespace ServiceLayer.Concrete
         /// <inheritdoc />
         public IEnumerable<ExistingArticleGroupDto> GetAllArticleGroups()
         {
-            return SimpleCrudHelper.GetAll<ArticleGroup, ExistingArticleGroupDto>();
+            return SimpleCrudHelper.GetAllAsDto<ArticleGroup, ExistingArticleGroupDto>();
         }
     }
 }

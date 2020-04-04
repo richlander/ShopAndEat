@@ -2,8 +2,10 @@
 using DTO.Article;
 using DTO.ArticleGroup;
 using DTO.Ingredient;
+using DTO.Meal;
 using DTO.MealType;
 using DTO.PurchaseItem;
+using DTO.Recipe;
 using DTO.Unit;
 
 namespace DTO
@@ -20,6 +22,7 @@ namespace DTO
                 config.CreateMap<NewIngredientDto, DataLayer.EfClasses.Ingredient>().IgnoreAllPropertiesWithAnInaccessibleSetter();
                 config.CreateMap<NewArticleDto, DataLayer.EfClasses.Article>().IgnoreAllPropertiesWithAnInaccessibleSetter();
                 config.CreateMap<NewPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+                config.CreateMap<NewMealDto, DataLayer.EfClasses.Meal>().IgnoreAllPropertiesWithAnInaccessibleSetter();
 
                 config.CreateMap<ExistingArticleGroupDto, DataLayer.EfClasses.ArticleGroup>()
                       .IgnoreAllPropertiesWithAnInaccessibleSetter()
@@ -35,6 +38,10 @@ namespace DTO
                       .IgnoreAllPropertiesWithAnInaccessibleSetter()
                       .ReverseMap();
                 config.CreateMap<ExistingPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>()
+                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                      .ReverseMap();
+                config.CreateMap<ExistingMealDto, DataLayer.EfClasses.Meal>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+                config.CreateMap<ExistingRecipeDto, DataLayer.EfClasses.Recipe>()
                       .IgnoreAllPropertiesWithAnInaccessibleSetter()
                       .ReverseMap();
             });
