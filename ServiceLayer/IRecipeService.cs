@@ -3,7 +3,7 @@ using DTO.Recipe;
 
 namespace ServiceLayer
 {
-    internal interface IRecipeService
+    public interface IRecipeService
     {
         IEnumerable<ExistingRecipeDto> GetAllRecipes();
     }

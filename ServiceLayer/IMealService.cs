@@ -6,7 +6,7 @@ using DTO.Store;
 
 namespace ServiceLayer
 {
-    internal interface IMealService
+    public interface IMealService
     {
         ExistingMealDto CreateMeal(NewMealDto newMealDto);
 

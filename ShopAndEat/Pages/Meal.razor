@@ -1,0 +1,26 @@
+﻿@page "/meal"
+@using DTO.Meal
+@using ServiceLayer
+@inject IMealService MealService
+
+<p>Number of meals: @Meals.Count()</p>
+
+<button class="btn btn-primary" @onclick="GetAllMeals">Get all Meals</button>
+
+@code {
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Meals = new List<ExistingMealDto>();
+    }
+    
+    private IEnumerable<ExistingMealDto> Meals { get; set; }
+
+    private void GetAllMeals()
+    {
+        Meals = MealService.GetAllMeals();
+    }
+}
