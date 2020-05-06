@@ -21,11 +21,22 @@
     </tr>
     @foreach (var meal in Meals)
     {
-        <tr>
-            <td>@meal.Day.ToShortDateString()</td>
-            <td>@meal.MealType.Name</td>
-            <td>@meal.Recipe.Name</td>
-        </tr>
+        @if (meal.Day.Date == DateTime.Today)
+        {
+            <tr style="background-color:#00FF00">
+                <td>@meal.Day.ToShortDateString()</td>
+                <td>@meal.MealType.Name</td>
+                <td>@meal.Recipe.Name</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>@meal.Day.ToShortDateString()</td>
+                <td>@meal.MealType.Name</td>
+                <td>@meal.Recipe.Name</td>
+            </tr>
+        }
     }
 </table>
 
@@ -37,7 +48,8 @@
         <label>
             Recipe:
             <InputSelect @bind-Value="_mealModel.RecipeName">
-                @foreach (var recipe in Recipes.OrderBy(x=>x.Name))
+                <option>Choose Recipe...</option>
+                @foreach (var recipe in Recipes.OrderBy(x => x.Name))
                 {
                     <option value="@recipe.Name">@recipe.Name</option>
                 }
@@ -48,6 +60,7 @@
         <label>
             Meal type:
             <InputSelect @bind-Value="_mealModel.MealTypeName">
+                <option>Choose Meal Type...</option>
                 @foreach (var mealType in MealTypes.OrderBy(x => x.Name))
                 {
                     <option value="@mealType.Name">@mealType.Name</option>
@@ -88,7 +101,14 @@ else
     <ul>
         @foreach (var purchaseItem in PurchaseItems)
         {
-            <li>@purchaseItem.Quantity @purchaseItem.Unit.Name @purchaseItem.Article.Name</li>
+            @if (purchaseItem.Unit.Name == "Stück")
+            {
+                <li>@purchaseItem.Quantity @purchaseItem.Article.Name</li>
+            }
+            else
+            {
+                <li>@purchaseItem.Quantity @purchaseItem.Unit.Name @purchaseItem.Article.Name</li>
+            }
         }
     </ul>
 }
