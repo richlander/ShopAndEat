@@ -53,7 +53,7 @@
 
                 <tr>
                      <td>
-                         <input type="number" @onchange="@(e => QuantityChanged(e, ingredientNumber))"/>
+                         <input type="number" step=0.1 min=0 @onchange="@(e => QuantityChanged(e, ingredientNumber))"/>
                      </td>
                      <td>
                       <select @onchange="@(e => UnitChanged(e, ingredientNumber))">
@@ -134,7 +134,7 @@
 
     private void QuantityChanged(ChangeEventArgs e, int ingredientNumber)
     {
-        _recipeModel.IngredientQuantities[ingredientNumber] = Convert.ToUInt32(e.Value);
+        _recipeModel.IngredientQuantities[ingredientNumber] = Convert.ToDouble(e.Value);
     }
 
     private void UnitChanged(ChangeEventArgs e, int ingredientNumber)

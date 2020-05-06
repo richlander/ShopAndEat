@@ -8,7 +8,7 @@ namespace ShopAndEat.Models
         {
             // TODO mu88: Make this smarter
             var numberOfIngredients = 30;
-            IngredientQuantities = new uint[numberOfIngredients];
+            IngredientQuantities = new double[numberOfIngredients];
             IngredientUnitIds = new int[numberOfIngredients];
             IngredientArticleNames = new string[numberOfIngredients];
             IngredientArticleGroupIds = new int[numberOfIngredients];
@@ -19,7 +19,7 @@ namespace ShopAndEat.Models
 
         [Required] public int NumberOfDays { get; set; }
 
-        [Required] public uint[] IngredientQuantities { get; set; }
+        [Required] public double[] IngredientQuantities { get; set; }
 
         [Required] public int[] IngredientUnitIds { get; set; }
 
