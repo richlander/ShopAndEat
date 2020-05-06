@@ -8,12 +8,14 @@ namespace BizLogic.Concrete
     {
         public IEnumerable<PurchaseItem> OrderPurchaseItemsByStore(Store store, IEnumerable<PurchaseItem> purchaseItems)
         {
-            return store.Compartments.Join(purchaseItems,
-                                           shoppingOrder => shoppingOrder.ArticleGroup,
-                                           purchaseItem => purchaseItem.Article.ArticleGroup,
-                                           (shoppingOrder, purchaseItem) => new { PurchaseItem = purchaseItem, shoppingOrder.Order })
-                        .OrderBy(x => x.Order)
-                        .Select(x => x.PurchaseItem);
+            return purchaseItems
+                   .Select(purchaseItem =>
+                               new KeyValuePair<PurchaseItem, ShoppingOrder>(purchaseItem,
+                                                                             store.Compartments.Single(x => x.ArticleGroup ==
+                                                                                                            purchaseItem
+                                                                                                                .Article.ArticleGroup)))
+                   .OrderBy(x => x.Value.Order)
+                   .Select(x => x.Key);
         }
     }
 }

@@ -1,4 +1,6 @@
 using AutoMapper;
+using BizDbAccess;
+using BizDbAccess.Concrete;
 using BizLogic;
 using BizLogic.Concrete;
 using DataLayer.EF;
@@ -32,12 +34,15 @@ namespace ShopAndEat
 
             ConfigureShopAndEatServices(services);
 
-            services.AddDbContext<EfCoreContext>(options => options.UseInMemoryDatabase("inMemory"));
+            // TODO mu88: Move to config
+            services.AddDbContext<EfCoreContext>(options => options.UseLazyLoadingProxies().UseSqlite("Data Source=/db/ShopAndEat.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UsePathBase("/shopAndEat");
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,13 +63,21 @@ namespace ShopAndEat
             });
         }
 
-        private static void ConfigureShopAndEatServices(IServiceCollection services)
+        private void ConfigureShopAndEatServices(IServiceCollection services)
         {
             services.AddTransient<SimpleCrudHelper>();
             services.AddTransient<IMealService, MealService>();
+            services.AddTransient<IStoreService, StoreService>();
+            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddTransient<IMealTypeService, MealTypeService>();
+            services.AddTransient<IUnitService, UnitService>();
+            services.AddTransient<IArticleService, ArticleService>();
+            services.AddTransient<IArticleGroupService, ArticleGroupService>();
+            services.AddTransient<IArticleAction, ArticleAction>();
+            services.AddTransient<IArticleDbAccess, ArticleDbAccess>();
             services.AddTransient<IGeneratePurchaseItemsForRecipesAction, GeneratePurchaseItemsForRecipesAction>();
             services.AddTransient<IOrderPurchaseItemsByStoreAction, OrderPurchaseItemsByStoreAction>();
-            services.AddSingleton<IMapper>(new Mapper().CreateMapper());
+            services.AddAutoMapper(typeof(Mapper));
         }
     }
 }

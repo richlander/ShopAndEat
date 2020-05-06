@@ -9,12 +9,11 @@ namespace DataLayer.EfClasses
             Name = name;
         }
 
-        [UsedImplicitly]
-        private MealType()
+        public MealType()
         {
         }
 
-        public string Name { get; }
+        public string Name { get; [UsedImplicitly] private set; }
 
         public int MealTypeId { get; [UsedImplicitly] private set; }
     }

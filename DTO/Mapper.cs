@@ -6,48 +6,36 @@ using DTO.Meal;
 using DTO.MealType;
 using DTO.PurchaseItem;
 using DTO.Recipe;
+using DTO.Store;
 using DTO.Unit;
 
 namespace DTO
 {
-    public class Mapper
+    public class Mapper : Profile
     {
-        public IMapper CreateMapper()
+        public Mapper()
         {
-            var configuration = new MapperConfiguration(config =>
-            {
-                config.CreateMap<NewArticleGroupDto, DataLayer.EfClasses.ArticleGroup>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<NewMealTypeDto, DataLayer.EfClasses.MealType>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<NewUnitDto, DataLayer.EfClasses.Unit>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<NewIngredientDto, DataLayer.EfClasses.Ingredient>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<NewArticleDto, DataLayer.EfClasses.Article>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<NewPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-                config.CreateMap<NewMealDto, DataLayer.EfClasses.Meal>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<NewArticleGroupDto, DataLayer.EfClasses.ArticleGroup>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<NewMealTypeDto, DataLayer.EfClasses.MealType>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<NewUnitDto, DataLayer.EfClasses.Unit>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<NewIngredientDto, DataLayer.EfClasses.Ingredient>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<NewArticleDto, DataLayer.EfClasses.Article>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<NewPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>().IgnoreAllPropertiesWithAnInaccessibleSetter();
 
-                config.CreateMap<ExistingArticleGroupDto, DataLayer.EfClasses.ArticleGroup>()
-                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                      .ReverseMap();
-                config.CreateMap<ExistingMealTypeDto, DataLayer.EfClasses.MealType>()
-                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                      .ReverseMap();
-                config.CreateMap<ExistingUnitDto, DataLayer.EfClasses.Unit>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
-                config.CreateMap<ExistingArticleDto, DataLayer.EfClasses.Article>()
-                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                      .ReverseMap();
-                config.CreateMap<ExistingIngredientDto, DataLayer.EfClasses.Ingredient>()
-                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                      .ReverseMap();
-                config.CreateMap<ExistingPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>()
-                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                      .ReverseMap();
-                config.CreateMap<ExistingMealDto, DataLayer.EfClasses.Meal>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
-                config.CreateMap<ExistingRecipeDto, DataLayer.EfClasses.Recipe>()
-                      .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                      .ReverseMap();
-            });
-            configuration.AssertConfigurationIsValid();
-
-            return configuration.CreateMapper();
+            CreateMap<ExistingArticleGroupDto, DataLayer.EfClasses.ArticleGroup>()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                .ReverseMap();
+            CreateMap<ExistingMealTypeDto, DataLayer.EfClasses.MealType>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingUnitDto, DataLayer.EfClasses.Unit>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingArticleDto, DataLayer.EfClasses.Article>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingIngredientDto, DataLayer.EfClasses.Ingredient>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                .ReverseMap();
+            CreateMap<NewPurchaseItemDto, DataLayer.EfClasses.PurchaseItem>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingMealDto, DataLayer.EfClasses.Meal>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingRecipeDto, DataLayer.EfClasses.Recipe>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            CreateMap<ExistingStoreDto, DataLayer.EfClasses.Store>().IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
         }
     }
 }

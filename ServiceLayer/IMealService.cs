@@ -10,7 +10,7 @@ namespace ServiceLayer
     {
         ExistingMealDto CreateMeal(NewMealDto newMealDto);
 
-        IEnumerable<ExistingMealDto> GetAllMeals();
+        IEnumerable<ExistingMealDto> GetFutureMeals();
 
         IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(IEnumerable<ExistingRecipeDto> recipes, ExistingStoreDto store);
     }

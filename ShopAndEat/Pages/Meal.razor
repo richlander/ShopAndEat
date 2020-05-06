@@ -1,11 +1,99 @@
 ﻿@page "/meal"
 @using DTO.Meal
+@using DTO.MealType
+@using DTO.PurchaseItem
+@using DTO.Recipe
+@using DTO.Store
 @using ServiceLayer
+@using ShopAndEat.Models
 @inject IMealService MealService
+@inject IStoreService StoreService
+@inject IRecipeService RecipeService
+@inject IMealTypeService MealTypeService
+@* TODO mu88: Build translator *@
 
-<p>Number of meals: @Meals.Count()</p>
+<table style="width: 100%">
+    <caption>Meal plan</caption>
+    <tr>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Recipe</th>
+    </tr>
+    @foreach (var meal in Meals)
+    {
+        <tr>
+            <td>@meal.Day.ToShortDateString()</td>
+            <td>@meal.MealType.Name</td>
+            <td>@meal.Recipe.Name</td>
+        </tr>
+    }
+</table>
 
-<button class="btn btn-primary" @onclick="GetAllMeals">Get all Meals</button>
+<EditForm Model="@_mealModel" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <p>
+        <label>
+            Recipe:
+            <InputSelect @bind-Value="_mealModel.RecipeName">
+                @foreach (var recipe in Recipes.OrderBy(x=>x.Name))
+                {
+                    <option value="@recipe.Name">@recipe.Name</option>
+                }
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Meal type:
+            <InputSelect @bind-Value="_mealModel.MealTypeName">
+                @foreach (var mealType in MealTypes.OrderBy(x => x.Name))
+                {
+                    <option value="@mealType.Name">@mealType.Name</option>
+                }
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Date:
+            <InputDate @bind-Value="_mealModel.Date"/>
+        </label>
+    </p>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+<select @onchange="SelectedStoreChanged">
+    @foreach (var store in Stores)
+    {
+        <option value="@store.Name">@store.Name</option>
+    }
+</select>
+
+@if (SelectedStore == null)
+{
+    <button class="btn btn-primary" disabled>Get shopping list</button>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="GetShoppingList">Get shopping list</button>
+}
+
+@if (PurchaseItems.Any())
+{
+    <h2>Purchase items</h2>
+    <ul>
+        @foreach (var purchaseItem in PurchaseItems)
+        {
+            <li>@purchaseItem.Quantity @purchaseItem.Unit.Name @purchaseItem.Article.Name</li>
+        }
+    </ul>
+}
+
+
 
 @code {
 
@@ -14,13 +102,56 @@
     {
         base.OnInitialized();
 
-        Meals = new List<ExistingMealDto>();
+        LoadMeals();
+        Recipes = RecipeService.GetAllRecipes();
+        MealTypes = MealTypeService.GetAllMealTypes();
+        PurchaseItems = new List<NewPurchaseItemDto>();
+        Stores = StoreService.GetAllStores();
+        SelectedStore = Stores.FirstOrDefault();
     }
-    
+
+    private void LoadMeals()
+    {
+        Meals = MealService.GetFutureMeals().ToList();
+        if (Meals.Any())
+        {
+            _mealModel.MealTypeName = Meals.First().MealType.Name;
+            _mealModel.RecipeName = Meals.First().Recipe.Name;
+            _mealModel.Date = Meals.First().Day;
+        }
+    }
+
     private IEnumerable<ExistingMealDto> Meals { get; set; }
 
-    private void GetAllMeals()
+    private IEnumerable<ExistingMealTypeDto> MealTypes { get; set; }
+
+    private IEnumerable<ExistingRecipeDto> Recipes { get; set; }
+
+    private IEnumerable<NewPurchaseItemDto> PurchaseItems { get; set; }
+
+    private IEnumerable<ExistingStoreDto> Stores { get; set; }
+
+    private ExistingStoreDto SelectedStore { get; set; }
+
+    private void GetShoppingList()
     {
-        Meals = MealService.GetAllMeals();
+        PurchaseItems = MealService.GetOrderedPurchaseItems(Meals.Select(x => x.Recipe), SelectedStore);
     }
+
+    void SelectedStoreChanged(ChangeEventArgs e)
+    {
+        SelectedStore = Stores.Single(x => x.Name == e.Value.ToString());
+    }
+
+    private readonly MealModel _mealModel = new MealModel();
+
+    private void HandleSubmit()
+    {
+        var newMeal = new NewMealDto(_mealModel.Date, 
+            MealTypes.Single(x => x.Name == _mealModel.MealTypeName), 
+            Recipes.Single(x => x.Name == _mealModel.RecipeName));
+        MealService.CreateMeal(newMeal);
+        LoadMeals();
+    }
+
 }

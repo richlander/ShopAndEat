@@ -3,7 +3,7 @@ using DTO.Ingredient;
 
 namespace ServiceLayer
 {
-    internal interface IIngredientService
+    public interface IIngredientService
     {
         ExistingIngredientDto CreateIngredient(NewIngredientDto newIngredientDto);
 

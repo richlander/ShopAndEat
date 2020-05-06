@@ -9,12 +9,11 @@ namespace DataLayer.EfClasses
             Name = name;
         }
 
-        [UsedImplicitly]
-        private ArticleGroup()
+        public ArticleGroup()
         {
         }
 
-        public string Name { get; }
+        public string Name { get; [UsedImplicitly] private set; }
 
         public int ArticleGroupId { get; [UsedImplicitly] private set; }
     }

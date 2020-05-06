@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using BizLogic;
@@ -39,16 +40,22 @@ namespace ServiceLayer.Concrete
         /// <inheritdoc />
         public ExistingMealDto CreateMeal(NewMealDto newMealDto)
         {
-            var existingMealDto = SimpleCrudHelper.Create<NewMealDto, Meal, ExistingMealDto>(newMealDto);
+            // TODO mu88: Try to avoid this manual mapping logic
+            var recipe = SimpleCrudHelper.Find<Recipe>(newMealDto.Recipe.RecipeId);
+            var mealType = SimpleCrudHelper.Find<MealType>(newMealDto.MealType.MealTypeId);
+            var newMeal = new Meal(newMealDto.Day,mealType,recipe);
+            var createdMeal = Context.Meals.Add(newMeal);
             Context.SaveChanges();
 
-            return existingMealDto;
+            return Mapper.Map<ExistingMealDto>(createdMeal.Entity);
         }
 
         /// <inheritdoc />
-        public IEnumerable<ExistingMealDto> GetAllMeals()
+        public IEnumerable<ExistingMealDto> GetFutureMeals()
         {
-            return SimpleCrudHelper.GetAllAsDto<Meal, ExistingMealDto>();
+            var allMeals = SimpleCrudHelper.GetAllAsDto<Meal, ExistingMealDto>();
+
+            return allMeals.Where(x => IsInFuture(x.Day));
         }
 
         /// <inheritdoc />
@@ -64,6 +71,14 @@ namespace ServiceLayer.Concrete
                                                                               .GeneratePurchaseItems(recipes));
 
             return Mapper.Map<IEnumerable<NewPurchaseItemDto>>(orderedPurchaseItemsByStore);
+        }
+
+        private bool IsInFuture(DateTime mealDate)
+        {
+            // only compare year, month and day - we don't need hours and minutes
+            var now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            
+            return mealDate >= now;
         }
     }
 }

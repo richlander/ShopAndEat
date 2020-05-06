@@ -1,0 +1,150 @@
+﻿@page "/recipe"
+@using DTO.Article
+@using DTO.Ingredient
+@using DTO.Recipe
+@using DTO.Unit
+@using ServiceLayer
+@using ShopAndEat.Models
+@inject IRecipeService RecipeService
+@inject IArticleService ArticleService
+@inject IUnitService UnitService
+@* TODO mu88: Build translator *@
+
+<table style="width: 100%">
+    <caption>Recipes</caption>
+    <tr>
+        <th>Name</th>
+    </tr>
+    @foreach (var recipe in Recipes)
+    {
+        <tr>
+            <td>@recipe.Name</td>
+        </tr>
+    }
+</table>
+
+<EditForm Model="@_recipeModel" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <p>
+        <label>
+            Name:
+            <InputText @bind-Value="_recipeModel.Name"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Number of Days:
+            <InputNumber @bind-Value="_recipeModel.NumberOfDays"/>
+        </label>
+    </p>
+    <p>
+        Ingredients:
+        <table>
+            <tr>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Article</th>
+            </tr>
+            @for (var i = 0; i < NumberOfIngredients; i++)
+            {
+                var ingredientNumber = i;
+
+                <tr>
+                     <td>
+                         <input type="number" @onchange="@(e => QuantityChanged(e, ingredientNumber))"/>
+                     </td>
+                     <td>
+                      <select @onchange="@(e => UnitChanged(e, ingredientNumber))">
+                          <option>Choose Unit...</option>
+                          @foreach (var unit in Units.OrderBy(x => x.Name))
+                          {
+                              <option value="@unit.UnitId">@unit.Name</option>
+                          }
+                      </select>
+                     </td>
+                     <td>
+                      <select @onchange="@(e => ArticleChanged(e, ingredientNumber))">
+                          <option>Choose Article...</option>
+                          @foreach (var article in Articles.OrderBy(x => x.Name))
+                          {
+                              <option value="@article.ArticleId">@article.Name</option>
+                          }
+                      </select>
+                     </td>
+                </tr>
+            }
+        </table>
+        <label @onclick="AddIngredient">Add another ingredient</label>
+    </p>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        LoadRecipes();
+        Units = UnitService.GetAllUnits();
+        Articles = ArticleService.GetAllArticles();
+        NumberOfIngredients = 1;
+    }
+
+    private IEnumerable<ExistingArticleDto> Articles { get; set; }
+
+    private IEnumerable<ExistingUnitDto> Units { get; set; }
+
+    private void LoadRecipes()
+    {
+        Recipes = RecipeService.GetAllRecipes();
+    }
+
+    private IEnumerable<ExistingRecipeDto> Recipes { get; set; }
+
+    private int NumberOfIngredients { get; set; }
+
+    private readonly RecipeModel _recipeModel = new RecipeModel();
+
+    private void HandleSubmit()
+    {
+        var ingredients = new List<NewIngredientDto>();
+        for (var i = 0; i < NumberOfIngredients; i++)
+        {
+            ingredients.Add(new NewIngredientDto(
+                Articles.Single(x => x.ArticleId == _recipeModel.IngredientArticleIds[i]), 
+                _recipeModel.IngredientQuantities[i], 
+                Units.Single(x => x.UnitId == _recipeModel.IngredientUnitIds[i])));
+        }
+
+        var newRecipe = new NewRecipeDto(_recipeModel.Name, _recipeModel.NumberOfDays, ingredients);
+        RecipeService.CreateNewRecipe(newRecipe);
+
+        LoadRecipes();
+    }
+
+    private void AddIngredient()
+    {
+        NumberOfIngredients++;
+    }
+
+    private void QuantityChanged(ChangeEventArgs e, int ingredientNumber)
+    {
+        _recipeModel.IngredientQuantities[ingredientNumber] = Convert.ToUInt32(e.Value);
+    }
+
+    private void UnitChanged(ChangeEventArgs e, int ingredientNumber)
+    {
+        _recipeModel.IngredientUnitIds[ingredientNumber] = Convert.ToInt32(e.Value);
+    }
+
+    private void ArticleChanged(ChangeEventArgs e, int ingredientNumber)
+    {
+        _recipeModel.IngredientArticleIds[ingredientNumber] = Convert.ToInt32(e.Value);
+    }
+
+}

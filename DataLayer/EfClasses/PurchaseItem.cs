@@ -16,11 +16,11 @@ namespace DataLayer.EfClasses
         {
         }
 
-        public Article Article { get; }
+        public virtual Article Article { get; [UsedImplicitly] private set; }
 
-        public Unit Unit { get; }
+        public virtual Unit Unit { get; [UsedImplicitly] private set; }
 
-        public uint Quantity { get; }
+        public uint Quantity { get; [UsedImplicitly] private set; }
 
         public int PurchaseItemId { get; [UsedImplicitly] private set; }
     }

@@ -1,0 +1,32 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ShopAndEat.Models
+{
+    public class RecipeModel2
+    {
+        public RecipeModel2()
+        {
+            // TODO mu88: Make this smarter
+            var numberOfIngredients = 30;
+            IngredientQuantities = new uint[numberOfIngredients];
+            IngredientUnitIds = new int[numberOfIngredients];
+            IngredientArticleNames = new string[numberOfIngredients];
+            IngredientArticleGroupIds = new int[numberOfIngredients];
+            IngredientArticleIsInventories = new bool[numberOfIngredients];
+        }
+
+        [Required] public string Name { get; set; }
+
+        [Required] public int NumberOfDays { get; set; }
+
+        [Required] public uint[] IngredientQuantities { get; set; }
+
+        [Required] public int[] IngredientUnitIds { get; set; }
+
+        [Required] public string[] IngredientArticleNames { get; set; }
+
+        [Required] public int[] IngredientArticleGroupIds { get; set; }
+
+        [Required] public bool[] IngredientArticleIsInventories { get; set; }
+    }
+}

@@ -1,0 +1,93 @@
+﻿@page "/article"
+@using DTO.Article
+@using DTO.ArticleGroup
+@using ServiceLayer
+@using ShopAndEat.Models
+@inject IArticleService ArticleService
+@inject IArticleGroupService ArticleGroupService
+@* TODO mu88: Build translator *@
+
+<table style="width: 100%">
+    <caption>Articles</caption>
+    <tr>
+        <th>Name</th>
+        <th>Article Group</th>
+        <th>Is Inventory</th>
+    </tr>
+    @foreach (var article in Articles)
+    {
+        <tr>
+            <td>@article.Name</td>
+            <td>@article.ArticleGroup.Name</td>
+            <td>@article.IsInventory</td>
+        </tr>
+    }
+</table>
+
+<EditForm Model="@_articleModel" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <p>
+        <label>
+            Name:
+            <InputText @bind-Value="_articleModel.ArticleName"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Article Group:
+            <InputSelect @bind-Value="_articleModel.ArticleGroupName">
+                <option>Choose Article Group...</option>
+                @foreach (var articleGroup in ArticleGroups.OrderBy(x => x.Name))
+                {
+                    <option value="@articleGroup.Name">@articleGroup.Name</option>
+                }
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Is Inventory:
+            <InputCheckbox @bind-Value="_articleModel.IsInventory"/>
+        </label>
+    </p>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+@code {
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        LoadArticles();
+        ArticleGroups = ArticleGroupService.GetAllArticleGroups();
+    }
+
+    private void LoadArticles()
+    {
+        Articles = ArticleService.GetAllArticles().ToList();
+        if (Articles.Any())
+        {
+            _articleModel.ArticleGroupName = Articles.First().ArticleGroup.Name;
+        }
+    }
+
+    private IEnumerable<ExistingArticleDto> Articles { get; set; }
+
+    private IEnumerable<ExistingArticleGroupDto> ArticleGroups { get; set; }
+
+    private readonly ArticleModel _articleModel = new ArticleModel();
+
+    private void HandleSubmit()
+    {
+        var newArticle = new NewArticleDto(_articleModel.ArticleName, ArticleGroups.Single(x => x.Name == _articleModel.ArticleGroupName), _articleModel.IsInventory);
+        ArticleService.CreateArticle(newArticle);
+        LoadArticles();
+    }
+
+}

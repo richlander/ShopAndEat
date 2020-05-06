@@ -4,20 +4,19 @@ namespace DataLayer.EfClasses
 {
     public class ShoppingOrder
     {
-        public ShoppingOrder(ArticleGroup articleGroup, in int order)
+        public ShoppingOrder(ArticleGroup articleGroup, int order)
         {
             ArticleGroup = articleGroup;
             Order = order;
         }
 
-        [UsedImplicitly]
-        private ShoppingOrder()
+        public ShoppingOrder()
         {
         }
 
-        public ArticleGroup ArticleGroup { get; }
+        public virtual ArticleGroup ArticleGroup { get; [UsedImplicitly] private set; }
 
-        public int Order { get; }
+        public int Order { get; [UsedImplicitly] private set; }
 
         public int ShoppingOrderId { get; [UsedImplicitly] private set; }
     }

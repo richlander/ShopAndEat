@@ -12,16 +12,15 @@ namespace DataLayer.EfClasses
             Recipe = recipe;
         }
 
-        [UsedImplicitly]
-        private Meal()
+        public Meal()
         {
         }
 
-        public DateTime Day { get; }
+        public DateTime Day { get; [UsedImplicitly] private set; }
 
-        public MealType MealType { get; }
+        public virtual MealType MealType { get; [UsedImplicitly] private set; }
 
-        public Recipe Recipe { get; }
+        public virtual Recipe Recipe { get; [UsedImplicitly] private set; }
 
         public int MealId { get; [UsedImplicitly] private set; }
     }

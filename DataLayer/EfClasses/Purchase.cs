@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using JetBrains.Annotations;
 
@@ -22,11 +21,11 @@ namespace DataLayer.EfClasses
         {
         }
 
-        public DateTime From { get; }
+        public virtual IEnumerable<PurchaseItem> PurchaseItems => _purchaseItems;
 
-        public DateTime To { get; }
+        public DateTime From { get; [UsedImplicitly] private set; }
 
-        public IReadOnlyCollection<PurchaseItem> PurchaseItems => new ReadOnlyCollection<PurchaseItem>(_purchaseItems);
+        public DateTime To { get; [UsedImplicitly] private set; }
 
         public int PurchaseId { get; [UsedImplicitly] private set; }
     }

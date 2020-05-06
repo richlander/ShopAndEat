@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using JetBrains.Annotations;
 
@@ -16,14 +15,13 @@ namespace DataLayer.EfClasses
             Name = name;
         }
 
-        [UsedImplicitly]
-        private Store()
+        public Store()
         {
         }
 
-        public string Name { get; }
+        public virtual IEnumerable<ShoppingOrder> Compartments => _compartments;
 
-        public IReadOnlyCollection<ShoppingOrder> Compartments => new ReadOnlyCollection<ShoppingOrder>(_compartments);
+        public string Name { get; [UsedImplicitly] private set; }
 
         public int StoreId { get; [UsedImplicitly] private set; }
 

@@ -9,12 +9,11 @@ namespace DataLayer.EfClasses
             Name = name;
         }
 
-        [UsedImplicitly]
-        private Unit()
+        public Unit()
         {
         }
 
-        public string Name { get; }
+        public string Name { get; [UsedImplicitly] private set; }
 
         public int UnitId { get; [UsedImplicitly] private set; }
     }
