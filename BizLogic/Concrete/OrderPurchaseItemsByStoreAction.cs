@@ -15,6 +15,8 @@ namespace BizLogic.Concrete
                                                                                                             purchaseItem
                                                                                                                 .Article.ArticleGroup)))
                    .OrderBy(x => x.Value.Order)
+                   .ThenBy(x => x.Key.Article.Name)
+                   .ThenBy(x => x.Key.Unit.Name)
                    .Select(x => x.Key);
         }
     }
