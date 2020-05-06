@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <DockerfileRunArguments>-v E:\Development\Docker\ShopAndEat\DB\:/db</DockerfileRunArguments>
+    <DockerfileRunArguments>-v $(ShopAndEatDbFolder):/db</DockerfileRunArguments>
     <DockerfileFile Condition="'$(Configuration)' == 'Debug'">Dockerfile.development</DockerfileFile>
     <DockerfileFile Condition="'$(Configuration)' == 'Release'">Dockerfile.production</DockerfileFile>
   </PropertyGroup>
