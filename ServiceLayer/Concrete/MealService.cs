@@ -76,7 +76,7 @@ namespace ServiceLayer.Concrete
                 }
             }
 
-            return results.OrderBy(x => x.Day).ThenBy(x => x.MealType.Name);
+            return results.OrderBy(x => x.Day).ThenBy(x => x.MealType.Order);
         }
 
         /// <inheritdoc />

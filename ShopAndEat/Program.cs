@@ -48,8 +48,8 @@ namespace ShopAndEat
             {
                 context.Database.EnsureCreated();
 
-                var mealType1 = new MealType("Mittagessen");
-                var mealType2 = new MealType("Abendessen");
+                var mealType1 = new MealType("Mittagessen",20);
+                var mealType2 = new MealType("Abendessen",30);
                 context.MealTypes.Add(mealType1);
                 context.MealTypes.Add(mealType2);
                 context.SaveChanges();
