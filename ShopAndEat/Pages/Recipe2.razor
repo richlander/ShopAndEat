@@ -125,12 +125,20 @@
         var ingredients = new List<NewIngredientDto>();
         for (var i = 0; i < NumberOfIngredients; i++)
         {
-            var newArticle = new NewArticleDto(_recipeModel.IngredientArticleNames[i],ArticleGroups.Single(x=>x.ArticleGroupId==_recipeModel.IngredientArticleGroupIds[i]),_recipeModel.IngredientArticleIsInventories[i]);
+            if (_recipeModel.IngredientArticleNames[i] == default)
+            {
+                continue;
+            }
+
+            var newArticle = new NewArticleDto(
+            _recipeModel.IngredientArticleNames[i],
+            ArticleGroups.Single(x=>x.ArticleGroupId==_recipeModel.IngredientArticleGroupIds[i]),
+            _recipeModel.IngredientArticleIsInventories[i]);
             var createdArticle = ArticleService.CreateArticle(newArticle);
 
             ingredients.Add(new NewIngredientDto(
-                createdArticle, 
-                _recipeModel.IngredientQuantities[i], 
+                createdArticle,
+                _recipeModel.IngredientQuantities[i],
                 Units.Single(x => x.UnitId == _recipeModel.IngredientUnitIds[i])));
         }
 

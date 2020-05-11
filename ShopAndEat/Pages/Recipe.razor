@@ -115,6 +115,11 @@
         var ingredients = new List<NewIngredientDto>();
         for (var i = 0; i < NumberOfIngredients; i++)
         {
+            if (_recipeModel.IngredientArticleIds[i]==default)
+            {
+                continue;
+            }
+
             ingredients.Add(new NewIngredientDto(
                 Articles.Single(x => x.ArticleId == _recipeModel.IngredientArticleIds[i]), 
                 _recipeModel.IngredientQuantities[i], 
