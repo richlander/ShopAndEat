@@ -5,7 +5,7 @@ namespace DTO.PurchaseItem
 {
     public class NewPurchaseItemDto
     {
-        public NewPurchaseItemDto(ExistingArticleDto article, ExistingUnitDto unit, uint quantity)
+        public NewPurchaseItemDto(ExistingArticleDto article, ExistingUnitDto unit, double quantity)
         {
             Article = article;
             Unit = unit;
@@ -16,6 +16,6 @@ namespace DTO.PurchaseItem
 
         public ExistingUnitDto Unit { get; }
 
-        public uint Quantity { get; }
+        public double Quantity { get; }
     }
 }

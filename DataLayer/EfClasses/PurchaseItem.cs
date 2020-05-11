@@ -4,7 +4,7 @@ namespace DataLayer.EfClasses
 {
     public class PurchaseItem
     {
-        public PurchaseItem(Article article, uint quantity, Unit unit)
+        public PurchaseItem(Article article, double quantity, Unit unit)
         {
             Article = article;
             Quantity = quantity;
@@ -20,7 +20,7 @@ namespace DataLayer.EfClasses
 
         public virtual Unit Unit { get; [UsedImplicitly] private set; }
 
-        public uint Quantity { get; [UsedImplicitly] private set; }
+        public double Quantity { get; [UsedImplicitly] private set; }
 
         public int PurchaseItemId { get; [UsedImplicitly] private set; }
     }

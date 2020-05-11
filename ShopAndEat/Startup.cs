@@ -77,6 +77,7 @@ namespace ShopAndEat
             services.AddTransient<IArticleDbAccess, ArticleDbAccess>();
             services.AddTransient<IGeneratePurchaseItemsForRecipesAction, GeneratePurchaseItemsForRecipesAction>();
             services.AddTransient<IOrderPurchaseItemsByStoreAction, OrderPurchaseItemsByStoreAction>();
+            services.AddTransient<IGetRecipesForMealsAction, GetRecipesForMealsAction>();
             services.AddAutoMapper(typeof(Mapper));
         }
     }

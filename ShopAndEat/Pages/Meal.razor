@@ -18,6 +18,7 @@
         <th>Day</th>
         <th>Time</th>
         <th>Recipe</th>
+        <th>Has been shopped</th>
     </tr>
     @foreach (var meal in Meals)
     {
@@ -27,6 +28,7 @@
                 <td>@meal.Day.ToShortDateString()</td>
                 <td>@meal.MealType.Name</td>
                 <td>@meal.Recipe.Name</td>
+                <td>@meal.HasBeenShopped</td>
             </tr>
         }
         else
@@ -35,6 +37,7 @@
                 <td>@meal.Day.ToShortDateString()</td>
                 <td>@meal.MealType.Name</td>
                 <td>@meal.Recipe.Name</td>
+                <td>@meal.HasBeenShopped</td>
             </tr>
         }
     }
@@ -155,7 +158,8 @@ else
 
     private void GetShoppingList()
     {
-        PurchaseItems = MealService.GetOrderedPurchaseItems(Meals.Select(x => x.Recipe), SelectedStore);
+        PurchaseItems = MealService.GetOrderedPurchaseItems(SelectedStore);
+        LoadMeals();
     }
 
     void SelectedStoreChanged(ChangeEventArgs e)

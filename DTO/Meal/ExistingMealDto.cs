@@ -9,12 +9,14 @@ namespace DTO.Meal
         public ExistingMealDto(DateTime day,
                                ExistingMealTypeDto mealType,
                                ExistingRecipeDto recipe,
-                               int mealId)
+                               int mealId,
+                               bool hasBeenShopped)
         {
             Day = day;
             MealType = mealType;
             Recipe = recipe;
             MealId = mealId;
+            HasBeenShopped = hasBeenShopped;
         }
 
         public DateTime Day { get; }
@@ -24,5 +26,7 @@ namespace DTO.Meal
         public ExistingRecipeDto Recipe { get; }
 
         public int MealId { get; }
+
+        public bool HasBeenShopped { get; }
     }
 }

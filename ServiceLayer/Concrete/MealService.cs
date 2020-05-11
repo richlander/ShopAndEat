@@ -17,6 +17,7 @@ namespace ServiceLayer.Concrete
     {
         public MealService(IGeneratePurchaseItemsForRecipesAction generatePurchaseItemsForRecipesAction,
                            IOrderPurchaseItemsByStoreAction orderPurchaseItemsByStoreAction,
+                           IGetRecipesForMealsAction getRecipesForMealsAction,
                            EfCoreContext context,
                            SimpleCrudHelper simpleCrudHelper,
                            IMapper mapper)
@@ -26,11 +27,14 @@ namespace ServiceLayer.Concrete
             Context = context;
             SimpleCrudHelper = simpleCrudHelper;
             Mapper = mapper;
+            GetRecipesForMealsAction = getRecipesForMealsAction;
         }
 
         private IGeneratePurchaseItemsForRecipesAction GeneratePurchaseItemsForRecipesAction { get; }
 
         private IOrderPurchaseItemsByStoreAction OrderPurchaseItemsByStoreAction { get; }
+
+        private IGetRecipesForMealsAction GetRecipesForMealsAction { get; }
 
         private EfCoreContext Context { get; }
 
@@ -63,7 +67,7 @@ namespace ServiceLayer.Concrete
                 {
                     for (var i = 0; i < meal.Recipe.NumberOfDays; i++)
                     {
-                        results.Add(new ExistingMealDto(meal.Day.AddDays(i), meal.MealType, meal.Recipe, meal.MealId));
+                        results.Add(new ExistingMealDto(meal.Day.AddDays(i), meal.MealType, meal.Recipe, meal.MealId, meal.HasBeenShopped));
                     }
                 }
                 else
@@ -88,6 +92,31 @@ namespace ServiceLayer.Concrete
                                                                               .GeneratePurchaseItems(recipes));
 
             return Mapper.Map<IEnumerable<NewPurchaseItemDto>>(orderedPurchaseItemsByStore);
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(ExistingStoreDto existingStoreDto)
+        {
+            var meals = Context.Meals.Where(x => !x.HasBeenShopped);
+            var recipes = GetRecipesForMealsAction.GetRecipesForMeals(meals);
+            var store = SimpleCrudHelper.Find<Store>(existingStoreDto.StoreId);
+
+            var orderedPurchaseItemsByStore =
+                OrderPurchaseItemsByStoreAction.OrderPurchaseItemsByStore(store,
+                                                                          GeneratePurchaseItemsForRecipesAction
+                                                                              .GeneratePurchaseItems(recipes));
+
+            foreach (var meal in meals)
+            {
+                meal.HasBeenShopped = true;
+            }
+
+            var newPurchaseItemDtos = Mapper.Map<IEnumerable<NewPurchaseItemDto>>(orderedPurchaseItemsByStore);
+
+            // TODO MUL: Investigate why conversion has to be done before calling SaveChanges()
+            Context.SaveChanges();
+            
+            return newPurchaseItemDtos;
         }
 
         private bool IsInFuture(DateTime mealDate)

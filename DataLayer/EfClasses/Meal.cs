@@ -23,5 +23,7 @@ namespace DataLayer.EfClasses
         public virtual Recipe Recipe { get; [UsedImplicitly] private set; }
 
         public int MealId { get; [UsedImplicitly] private set; }
+        
+        public bool HasBeenShopped { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace BizLogic.Concrete
             return recipes.Select(recipe => recipe.Ingredients)
                           .SelectMany(ingredients => ingredients)
                           .GroupBy(x => new { x.Article, x.Unit })
-                          .Select(y => new PurchaseItem(y.Key.Article, (uint)y.Sum(z => z.Quantity), y.Key.Unit));
+                          .Select(y => new PurchaseItem(y.Key.Article, y.Sum(z => z.Quantity), y.Key.Unit));
         }
     }
 }

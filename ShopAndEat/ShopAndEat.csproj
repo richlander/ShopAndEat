@@ -7,8 +7,7 @@
 
   <PropertyGroup>
     <DockerfileRunArguments>-v $(ShopAndEatDbFolder):/db</DockerfileRunArguments>
-    <DockerfileFile Condition="'$(Configuration)' == 'Debug'">Dockerfile.development</DockerfileFile>
-    <DockerfileFile Condition="'$(Configuration)' == 'Release'">Dockerfile.production</DockerfileFile>
+    <DockerfileBuildArguments Condition="'$(Configuration)' == 'Debug'">--build-arg BASE_IMAGE=mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim</DockerfileBuildArguments>
   </PropertyGroup>
 
   <ItemGroup>
