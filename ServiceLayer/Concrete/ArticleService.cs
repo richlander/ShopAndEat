@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using BizLogic;
 using DataLayer.EF;
@@ -48,7 +49,7 @@ namespace ServiceLayer.Concrete
         /// <inheritdoc />
         public IEnumerable<ExistingArticleDto> GetAllArticles()
         {
-            return ArticleAction.GetAllArticles();
+            return ArticleAction.GetAllArticles().OrderBy(x=>x.Name);
         }
     }
 }
