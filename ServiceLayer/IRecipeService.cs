@@ -8,5 +8,7 @@ namespace ServiceLayer
         IEnumerable<ExistingRecipeDto> GetAllRecipes();
 
         void CreateNewRecipe(NewRecipeDto newRecipe);
+
+        void DeleteRecipe(DeleteRecipeDto recipeToDelete);
     }
 }

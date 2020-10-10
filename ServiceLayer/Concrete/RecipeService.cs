@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DataLayer.EF;
 using DataLayer.EfClasses;
+using DTO.Meal;
 using DTO.Recipe;
 
 namespace ServiceLayer.Concrete
@@ -36,6 +38,19 @@ namespace ServiceLayer.Concrete
 
             var newRecipe = new Recipe(newRecipeDto.Name, newRecipeDto.NumberOfDays, newIngredients);
             Context.Recipes.Add(newRecipe);
+            Context.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public void DeleteRecipe(DeleteRecipeDto recipeToDelete)
+        {
+            var existingMeals = SimpleCrudHelper.GetAllAsDto<Meal, ExistingMealDto>();
+            existingMeals.Where(x => x.Recipe.RecipeId == recipeToDelete.RecipeId)
+                         .ToList()
+                         .ForEach(x => SimpleCrudHelper.Delete<Meal>(x.MealId));
+            var existingRecipe = SimpleCrudHelper.Find<Recipe>(recipeToDelete.RecipeId);
+            existingRecipe.Ingredients.Select(x => x.IngredientId).ToList().ForEach(x => SimpleCrudHelper.Delete<Ingredient>(x));
+            SimpleCrudHelper.Delete<Recipe>(recipeToDelete.RecipeId);
             Context.SaveChanges();
         }
     }

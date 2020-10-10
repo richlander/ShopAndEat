@@ -15,5 +15,7 @@ namespace ServiceLayer
         IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(IEnumerable<ExistingRecipeDto> recipes, ExistingStoreDto store);
         
         IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(ExistingStoreDto store);
+
+        void DeleteMeal(DeleteMealDto mealToDelete);
     }
 }

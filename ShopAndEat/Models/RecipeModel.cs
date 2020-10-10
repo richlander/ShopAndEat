@@ -22,5 +22,17 @@ namespace ShopAndEat.Models
         [Required] public int[] IngredientArticleIds { get; set; }
 
         [Required] public int[] IngredientUnitIds { get; set; }
+
+        public void DeleteIngredient(int idToDelete)
+        {
+            if (idToDelete < 0)
+            {
+                return;
+            }
+
+            IngredientQuantities[idToDelete] = default;
+            IngredientArticleIds[idToDelete] = default;
+            IngredientUnitIds[idToDelete] = default;
+        }
     }
 }

@@ -119,6 +119,13 @@ namespace ServiceLayer.Concrete
             return newPurchaseItemDtos;
         }
 
+        /// <inheritdoc />
+        public void DeleteMeal(DeleteMealDto mealToDelete)
+        {
+            SimpleCrudHelper.Delete<Meal>(mealToDelete.MealId);
+            Context.SaveChanges();
+        }
+
         private bool IsInFuture(DateTime mealDate)
         {
             // only compare year, month and day - we don't need hours and minutes

@@ -13,6 +13,7 @@
         <th>Name</th>
         <th>Article Group</th>
         <th>Is Inventory</th>
+        <th />
     </tr>
     @foreach (var article in Articles)
     {
@@ -20,6 +21,7 @@
             <td>@article.Name</td>
             <td>@article.ArticleGroup.Name</td>
             <td>@article.IsInventory</td>
+            <td><button class="btn btn-primary" @onclick="@(e => DeleteArticle(article.ArticleId))">❌</button></td>
         </tr>
     }
 </table>
@@ -87,6 +89,12 @@
     {
         var newArticle = new NewArticleDto(_articleModel.ArticleName, ArticleGroups.Single(x => x.Name == _articleModel.ArticleGroupName), _articleModel.IsInventory);
         ArticleService.CreateArticle(newArticle);
+        LoadArticles();
+    }
+
+    private void DeleteArticle(int articleId)
+    {
+        ArticleService.DeleteArticle(new DeleteArticleDto(articleId));
         LoadArticles();
     }
 
