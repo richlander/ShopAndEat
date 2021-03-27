@@ -10,5 +10,7 @@ namespace ServiceLayer
         void DeleteArticle(DeleteArticleDto deleteArticleDto);
 
         IEnumerable<ExistingArticleDto> GetAllArticles();
+
+        void UpdateArticle(ExistingArticleDto existingArticleDto);
     }
 }

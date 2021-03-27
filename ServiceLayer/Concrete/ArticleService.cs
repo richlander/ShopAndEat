@@ -33,7 +33,7 @@ namespace ServiceLayer.Concrete
         {
             // TODO mu88: Try to avoid this manual mapping logic
             var articleGroup = SimpleCrudHelper.Find<ArticleGroup>(newArticleDto.ArticleGroup.ArticleGroupId);
-            var newArticle = new Article(newArticleDto.Name, articleGroup, newArticleDto.IsInventory);
+            var newArticle = new Article{Name = newArticleDto.Name, ArticleGroup = articleGroup, IsInventory = newArticleDto.IsInventory};
             var createdArticle = Context.Articles.Add(newArticle);
             Context.SaveChanges();
 
@@ -50,6 +50,16 @@ namespace ServiceLayer.Concrete
         public IEnumerable<ExistingArticleDto> GetAllArticles()
         {
             return ArticleAction.GetAllArticles().OrderBy(x=>x.Name);
+        }
+
+        public void UpdateArticle(ExistingArticleDto existingArticleDto)
+        {
+            var articleGroup = SimpleCrudHelper.Find<ArticleGroup>(existingArticleDto.ArticleGroup.ArticleGroupId);
+            var article = SimpleCrudHelper.Find<Article>(existingArticleDto.ArticleId);
+            article.ArticleGroup = articleGroup;
+            article.IsInventory = existingArticleDto.IsInventory;
+            article.Name = existingArticleDto.Name;
+            Context.SaveChanges();
         }
     }
 }

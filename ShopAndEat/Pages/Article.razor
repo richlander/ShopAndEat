@@ -14,15 +14,17 @@
         <th>Article Group</th>
         <th>Is Inventory</th>
         <th />
+        <th />
     </tr>
     @foreach (var article in Articles)
     {
-        <tr>
-            <td>@article.Name</td>
-            <td>@article.ArticleGroup.Name</td>
-            <td>@article.IsInventory</td>
-            <td><button class="btn btn-primary" @onclick="@(e => DeleteArticle(article.ArticleId))">❌</button></td>
-        </tr>
+<tr>
+    <td>@article.Name</td>
+    <td>@article.ArticleGroup.Name</td>
+    <td>@article.IsInventory</td>
+    <td><button class="btn btn-primary" @onclick="@(e => DeleteArticle(article.ArticleId))">❌</button></td>
+    <td><button class="btn btn-primary" @onclick="@(e => EditArticle(article.ArticleId))">🖊</button></td>
+</tr>
     }
 </table>
 
@@ -55,7 +57,7 @@
         </label>
     </p>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Save</button>
 </EditForm>
 
 
@@ -87,8 +89,17 @@
 
     private void HandleSubmit()
     {
-        var newArticle = new NewArticleDto(_articleModel.ArticleName, ArticleGroups.Single(x => x.Name == _articleModel.ArticleGroupName), _articleModel.IsInventory);
-        ArticleService.CreateArticle(newArticle);
+        if (_articleModel.ArticleId == default)
+        {
+            var newArticle = new NewArticleDto(_articleModel.ArticleName, ArticleGroups.Single(x => x.Name == _articleModel.ArticleGroupName), _articleModel.IsInventory);
+            ArticleService.CreateArticle(newArticle);
+        }
+        else
+        {
+            var updatedArticle = new ExistingArticleDto(_articleModel.ArticleId, _articleModel.ArticleName, ArticleGroups.Single(x => x.Name == _articleModel.ArticleGroupName), _articleModel.IsInventory);
+            ArticleService.UpdateArticle(updatedArticle);
+            _articleModel.ArticleId = default;
+        }
         LoadArticles();
     }
 
@@ -96,6 +107,15 @@
     {
         ArticleService.DeleteArticle(new DeleteArticleDto(articleId));
         LoadArticles();
+    }
+
+    private void EditArticle(int articleId)
+    {
+        var article = Articles.Single(x => x.ArticleId == articleId);
+        _articleModel.ArticleId = article.ArticleId;
+        _articleModel.ArticleName = article.Name;
+        _articleModel.ArticleGroupName = article.ArticleGroup.Name;
+        _articleModel.IsInventory = article.IsInventory;
     }
 
 }

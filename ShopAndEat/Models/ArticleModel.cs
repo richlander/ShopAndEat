@@ -8,6 +8,8 @@ namespace ShopAndEat.Models
         {
         }
 
+        [Required] public int ArticleId { get; set; }
+
         [Required] public string ArticleName { get; set; }
 
         [Required] public string ArticleGroupName { get; set; }

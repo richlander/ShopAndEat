@@ -4,23 +4,12 @@ namespace DataLayer.EfClasses
 {
     public class Article
     {
-        public Article(string name, ArticleGroup articleGroup, bool isInventory)
-        {
-            Name = name;
-            ArticleGroup = articleGroup;
-            IsInventory = isInventory;
-        }
+        public string Name { get; set; }
 
-        public Article()
-        {
-        }
+        public virtual ArticleGroup ArticleGroup { get; set; }
 
-        public string Name { get; [UsedImplicitly] private set; }
+        public bool IsInventory { get; set; }
 
-        public virtual ArticleGroup ArticleGroup { get; [UsedImplicitly] private set; }
-
-        public bool IsInventory { get; [UsedImplicitly] private set; }
-
-        public int ArticleId { get; [UsedImplicitly] private set; }
+        public int ArticleId { get; set; }
     }
 }
