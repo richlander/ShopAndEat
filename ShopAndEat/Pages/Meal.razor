@@ -44,12 +44,13 @@ else
         }
         else
         {
-            <tr>
-                <td>@meal.Day.ToShortDateString()</td>
-                <td>@meal.MealType.Name</td>
-                <td>@meal.Recipe.Name</td>
-                <td>@meal.HasBeenShopped</td>
-            </tr>
+<tr>
+    <td>@meal.Day.ToShortDateString()</td>
+    <td>@meal.MealType.Name</td>
+    <td>@meal.Recipe.Name</td>
+    <td>@meal.HasBeenShopped</td>
+    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
+</tr>
         }
     }
 </table>
