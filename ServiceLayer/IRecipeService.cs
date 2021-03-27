@@ -10,5 +10,7 @@ namespace ServiceLayer
         void CreateNewRecipe(NewRecipeDto newRecipe);
 
         void DeleteRecipe(DeleteRecipeDto recipeToDelete);
+        
+        void UpdateRecipe(UpdateRecipeDto existingRecipeDto);
     }
 }

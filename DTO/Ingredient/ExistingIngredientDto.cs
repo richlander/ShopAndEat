@@ -6,7 +6,7 @@ namespace DTO.Ingredient
     public class ExistingIngredientDto
     {
         public ExistingIngredientDto(ExistingArticleDto article,
-                                     uint quantity,
+                                     double quantity,
                                      ExistingUnitDto unit,
                                      int ingredientId)
         {
@@ -18,7 +18,7 @@ namespace DTO.Ingredient
 
         public ExistingArticleDto Article { get; }
 
-        public uint Quantity { get; }
+        public double Quantity { get; }
 
         public ExistingUnitDto Unit { get; }
 

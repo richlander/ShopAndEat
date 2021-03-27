@@ -53,5 +53,29 @@ namespace ServiceLayer.Concrete
             SimpleCrudHelper.Delete<Recipe>(recipeToDelete.RecipeId);
             Context.SaveChanges();
         }
+
+        public void UpdateRecipe(UpdateRecipeDto existingRecipeDto)
+        {
+            var recipe = SimpleCrudHelper.Find<Recipe>(existingRecipeDto.RecipeId);
+
+            foreach (var ingredientId in recipe.Ingredients.Select(x=>x.IngredientId).ToList())
+            {
+                SimpleCrudHelper.Delete<Ingredient>(ingredientId);
+            }
+
+            var newIngredients = new List<Ingredient>();
+            foreach (var newIngredientDto in existingRecipeDto.Ingredients)
+            {
+                var unit = SimpleCrudHelper.Find<Unit>(newIngredientDto.Unit.UnitId);
+                var article = SimpleCrudHelper.Find<Article>(newIngredientDto.Article.ArticleId);
+                newIngredients.Add(Context.Ingredients.Add(new Ingredient(article, newIngredientDto.Quantity, unit)).Entity);
+            }
+
+            recipe.Name = existingRecipeDto.Name;
+            recipe.NumberOfDays = existingRecipeDto.NumberOfDays;
+            recipe.Ingredients = newIngredients;
+
+            Context.SaveChanges();
+        }
     }
 }
