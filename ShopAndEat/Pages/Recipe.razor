@@ -10,20 +10,24 @@
 @inject IUnitService UnitService
 @* TODO mu88: Build translator *@
 
-<table style="width: 100%">
+<table class="table table-striped">
     <caption>Recipes</caption>
+    <thead>
     <tr>
-        <th>Name</th>
-        <th />
+        <th scope="col">Name</th>
+        <th scope="col" />
     </tr>
-    @foreach (var recipe in Recipes)
-    {
-        <tr>
-            <td>@recipe.Name</td>
-            <td><button class="btn btn-primary" @onclick="@(e => DeleteRecipe(recipe.RecipeId))">❌</button></td>
-            <td><button class="btn btn-primary" @onclick="@(e => EditRecipe(recipe.RecipeId))">🖊</button></td>
-        </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var recipe in Recipes)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td><button class="btn btn-primary" @onclick="@(e => DeleteRecipe(recipe.RecipeId))">❌</button></td>
+                <td><button class="btn btn-primary" @onclick="@(e => EditRecipe(recipe.RecipeId))">🖊</button></td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 <EditForm Model="@_recipeModel" OnSubmit="HandleSubmit">

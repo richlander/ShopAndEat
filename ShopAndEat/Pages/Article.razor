@@ -7,25 +7,29 @@
 @inject IArticleGroupService ArticleGroupService
 @* TODO mu88: Build translator *@
 
-<table style="width: 100%">
+<table class="table table-striped">
     <caption>Articles</caption>
+    <thead>
     <tr>
-        <th>Name</th>
-        <th>Article Group</th>
-        <th>Is Inventory</th>
-        <th />
-        <th />
+        <th scope="col">Name</th>
+        <th scope="col">Article Group</th>
+        <th scope="col">Is Inventory</th>
+        <th scope="col" />
+        <th scope="col" />
     </tr>
+    </thead>
+    <tbody>
     @foreach (var article in Articles)
     {
-<tr>
-    <td>@article.Name</td>
-    <td>@article.ArticleGroup.Name</td>
-    <td>@article.IsInventory</td>
-    <td><button class="btn btn-primary" @onclick="@(e => DeleteArticle(article.ArticleId))">❌</button></td>
-    <td><button class="btn btn-primary" @onclick="@(e => EditArticle(article.ArticleId))">🖊</button></td>
-</tr>
+        <tr>
+            <td>@article.Name</td>
+            <td>@article.ArticleGroup.Name</td>
+            <td>@article.IsInventory</td>
+            <td><button class="btn btn-primary" @onclick="@(e => DeleteArticle(article.ArticleId))">❌</button></td>
+            <td><button class="btn btn-primary" @onclick="@(e => EditArticle(article.ArticleId))">🖊</button></td>
+        </tr>
     }
+    </tbody>
 </table>
 
 <EditForm Model="@_articleModel" OnSubmit="HandleSubmit">

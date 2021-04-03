@@ -1,4 +1,5 @@
-﻿@page "/meal"
+﻿@page "/"
+@page "/meal"
 @using DTO.Meal
 @using DTO.MealType
 @using DTO.PurchaseItem
@@ -12,6 +13,13 @@
 @inject IMealTypeService MealTypeService
 @* TODO mu88: Build translator *@
 
+<select @onchange="SelectedStoreChanged">
+    @foreach (var store in Stores)
+    {
+        <option value="@store.Name">@store.Name</option>
+    }
+</select>
+
 @if (SelectedStore == null)
 {
     <button class="btn btn-primary" disabled>Get shopping list</button>
@@ -21,38 +29,44 @@ else
     <button class="btn btn-primary" @onclick="GetShoppingList">Get shopping list</button>
 }
 
-<table style="width: 100%">
+<hr>
+
+<table class="table table-striped">
     <caption>Meal plan</caption>
-    <tr>
-        <th>Day</th>
-        <th>Time</th>
-        <th>Recipe</th>
-        <th>Has been shopped</th>
-        <th />
-    </tr>
-    @foreach (var meal in Meals)
-    {
-        @if (meal.Day.Date == DateTime.Today)
+    <thead>
+        <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Time</th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Has been shopped</th>
+            <th scope="col" />
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var meal in Meals)
         {
-<tr style="background-color:#00FF00">
-    <td>@meal.Day.ToShortDateString()</td>
-    <td>@meal.MealType.Name</td>
-    <td>@meal.Recipe.Name</td>
-    <td>@meal.HasBeenShopped</td>
-    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
-</tr>
+            @if (meal.Day.Date == DateTime.Today)
+            {
+                <tr style="background-color:#00FF00">
+                    <td>@meal.Day.ToShortDateString()</td>
+                    <td>@meal.MealType.Name</td>
+                    <td>@meal.Recipe.Name</td>
+                    <td>@meal.HasBeenShopped</td>
+                    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@meal.Day.ToShortDateString()</td>
+                    <td>@meal.MealType.Name</td>
+                    <td>@meal.Recipe.Name</td>
+                    <td>@meal.HasBeenShopped</td>
+                    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
+                </tr>
+            }
         }
-        else
-        {
-<tr>
-    <td>@meal.Day.ToShortDateString()</td>
-    <td>@meal.MealType.Name</td>
-    <td>@meal.Recipe.Name</td>
-    <td>@meal.HasBeenShopped</td>
-    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
-</tr>
-        }
-    }
+    </tbody>
 </table>
 
 <EditForm Model="@_mealModel" OnSubmit="HandleSubmit">
@@ -90,16 +104,10 @@ else
         </label>
     </p>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Save</button>
 </EditForm>
 
-
-<select @onchange="SelectedStoreChanged">
-    @foreach (var store in Stores)
-    {
-        <option value="@store.Name">@store.Name</option>
-    }
-</select>
+<hr>
 
 @if (PurchaseItems.Any())
 {
