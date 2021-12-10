@@ -22,7 +22,7 @@ namespace ServiceLayer.Concrete
         /// <inheritdoc />
         public IEnumerable<ExistingRecipeDto> GetAllRecipes()
         {
-            return SimpleCrudHelper.GetAllAsDto<Recipe, ExistingRecipeDto>();
+            return SimpleCrudHelper.GetAllAsDto<Recipe, ExistingRecipeDto>().OrderBy(recipe => recipe.Name);
         }
 
         /// <inheritdoc />
