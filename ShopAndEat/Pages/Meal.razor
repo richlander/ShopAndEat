@@ -48,7 +48,7 @@ else
             @if (meal.Day.Date == DateTime.Today)
             {
                 <tr style="background-color:#00FF00">
-                    <td>@meal.Day.ToShortDateString()</td>
+                    <td>@meal.Day.ToShortDateString() (@meal.Day.ToString("dddd"))</td>
                     <td>@meal.MealType.Name</td>
                     <td>@meal.Recipe.Name</td>
                     <td>@meal.HasBeenShopped</td>
@@ -58,7 +58,7 @@ else
             else
             {
                 <tr>
-                    <td>@meal.Day.ToShortDateString()</td>
+                    <td>@meal.Day.ToShortDateString() (@meal.Day.ToString("dddd"))</td>
                     <td>@meal.MealType.Name</td>
                     <td>@meal.Recipe.Name</td>
                     <td>@meal.HasBeenShopped</td>
