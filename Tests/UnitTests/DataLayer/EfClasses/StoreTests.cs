@@ -32,7 +32,7 @@ namespace Tests.UnitTests.DataLayer.EfClasses
 
             testee.AddCompartment(compartmentToAdd);
 
-            testee.Compartments.Should().BeEquivalentTo(existingCompartment, compartmentToAdd);
+            testee.Compartments.Should().BeEquivalentTo(new []{existingCompartment, compartmentToAdd});
         }
 
         [Test]

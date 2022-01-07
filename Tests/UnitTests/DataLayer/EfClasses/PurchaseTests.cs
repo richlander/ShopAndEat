@@ -16,7 +16,7 @@ namespace Tests.UnitTests.DataLayer.EfClasses
             var to = new DateTime();
             var purchaseItems = new Collection<PurchaseItem>
                                 {
-                                    new PurchaseItem(new Article("Tomato", new ArticleGroup("Vegetables"), false), 3, new Unit("Bag"))
+                                    new PurchaseItem(new Article{Name="Tomato", ArticleGroup = new ArticleGroup("Vegetables"), IsInventory = false}, 3, new Unit("Bag"))
                                 };
 
             var testee = new Purchase(from, to, purchaseItems);

@@ -16,7 +16,7 @@ namespace Tests.UnitTests.DataLayer.EfClasses
             var ingredientGroup = new ArticleGroup("Gemüse");
             var isInventory = true;
 
-            var testee = new Article(name, ingredientGroup, isInventory);
+            var testee = new Article{Name =name, ArticleGroup = ingredientGroup,IsInventory = isInventory};
 
             testee.Name.Should().Be(name);
             testee.ArticleGroup.Should().Be(ingredientGroup);

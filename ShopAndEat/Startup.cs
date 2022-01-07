@@ -4,6 +4,7 @@ using BizDbAccess.Concrete;
 using BizLogic;
 using BizLogic.Concrete;
 using DataLayer.EF;
+using DTO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServiceLayer;
 using ServiceLayer.Concrete;
-using Mapper = DTO.Mapper;
 
 namespace ShopAndEat
 {
@@ -78,7 +78,7 @@ namespace ShopAndEat
             services.AddTransient<IGeneratePurchaseItemsForRecipesAction, GeneratePurchaseItemsForRecipesAction>();
             services.AddTransient<IOrderPurchaseItemsByStoreAction, OrderPurchaseItemsByStoreAction>();
             services.AddTransient<IGetRecipesForMealsAction, GetRecipesForMealsAction>();
-            services.AddAutoMapper(typeof(Mapper));
+            services.AddAutoMapper(typeof(AutoMapperProfile));
         }
     }
 }

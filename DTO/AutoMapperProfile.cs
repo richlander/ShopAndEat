@@ -11,9 +11,9 @@ using DTO.Unit;
 
 namespace DTO
 {
-    public class Mapper : Profile
+    public class AutoMapperProfile : Profile
     {
-        public Mapper()
+        public AutoMapperProfile()
         {
             CreateMap<NewArticleGroupDto, DataLayer.EfClasses.ArticleGroup>().IgnoreAllPropertiesWithAnInaccessibleSetter();
             CreateMap<NewMealTypeDto, DataLayer.EfClasses.MealType>().IgnoreAllPropertiesWithAnInaccessibleSetter();

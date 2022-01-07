@@ -1,4 +1,5 @@
-﻿using DataLayer.EF;
+﻿using System;
+using DataLayer.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace Tests
@@ -7,7 +8,7 @@ namespace Tests
     {
         /// <inheritdoc />
         public InMemoryDbContext()
-            : base(new DbContextOptionsBuilder<EfCoreContext>().UseInMemoryDatabase("inMemory").Options)
+            : base(new DbContextOptionsBuilder<EfCoreContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options)
         {
         }
     }

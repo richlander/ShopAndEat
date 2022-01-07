@@ -13,7 +13,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = new ArticleGroup("Vegetables");
-            var tomato = new Article("Tomato", vegetables, false);
+            var tomato = new Article{Name="Tomato", ArticleGroup = vegetables, IsInventory = false};
             var piece = new Unit("Piece");
             inMemoryDbContext.ArticleGroups.Add(vegetables);
             inMemoryDbContext.Articles.Add(tomato);
@@ -32,7 +32,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = new ArticleGroup("Vegetables");
-            var tomato = new Article("Tomato", vegetables, false);
+            var tomato = new Article{Name="Tomato", ArticleGroup = vegetables, IsInventory = false};
             var piece = new Unit("Piece");
             inMemoryDbContext.ArticleGroups.Add(vegetables);
             inMemoryDbContext.Articles.Add(tomato);
@@ -51,7 +51,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = new ArticleGroup("Vegetables");
-            var tomato = new Article("Tomato", vegetables, false);
+            var tomato = new Article{Name="Tomato", ArticleGroup = vegetables, IsInventory = false};
             var piece = new Unit("Piece");
             inMemoryDbContext.ArticleGroups.Add(vegetables);
             inMemoryDbContext.Articles.Add(tomato);
@@ -70,7 +70,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = new ArticleGroup("Vegetables");
-            var tomato = new Article("Tomato", vegetables, false);
+            var tomato = new Article{Name="Tomato", ArticleGroup = vegetables, IsInventory = false};
             var piece = new Unit("Piece");
             inMemoryDbContext.ArticleGroups.Add(vegetables);
             inMemoryDbContext.Articles.Add(tomato);

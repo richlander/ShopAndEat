@@ -12,8 +12,9 @@ namespace Tests.UnitTests.BizLogic
         [Test]
         public void GetRecipesForMeals()
         {
-            var meal1 = new Meal(new DateTime(), new MealType("Lunch"), new Recipe("Recipe 1", 3, new Ingredient[] { }));
-            var meal2 = new Meal(new DateTime(), new MealType("Lunch"), new Recipe("Recipe 2", 3, new Ingredient[] { }));
+            var mealType = new MealType("Lunch", 1);
+            var meal1 = new Meal(new DateTime(), mealType, new Recipe("Recipe 1", 3, new Ingredient[] { }));
+            var meal2 = new Meal(new DateTime(), mealType, new Recipe("Recipe 2", 3, new Ingredient[] { }));
             var meals = new[] { meal1, meal2 };
             var testee = new GetRecipesForMealsAction();
 

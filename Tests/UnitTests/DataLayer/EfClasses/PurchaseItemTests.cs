@@ -10,7 +10,7 @@ namespace Tests.UnitTests.DataLayer.EfClasses
         [Test]
         public void CreatePurchaseItem()
         {
-            var article = new Article("Tomato", new ArticleGroup("Vegetables"), false);
+            var article = new Article{Name="Tomato", ArticleGroup = new ArticleGroup("Vegetables"), IsInventory = false};
             uint quantity = 3;
             var unit = new Unit("Bag");
 

@@ -8,6 +8,7 @@ using DTO.PurchaseItem;
 using DTO.Unit;
 using Moq;
 using NUnit.Framework;
+using Tests.Doubles;
 
 namespace Tests.UnitTests.BizLogic
 {
@@ -22,7 +23,7 @@ namespace Tests.UnitTests.BizLogic
                                        new ExistingUnitDto(1, "Piece"),
                                        2);
             var purchaseItemDbAccessMock = new Mock<IPurchaseItemDbAccess>();
-            var testee = new PurchaseItemAction(purchaseItemDbAccessMock.Object, new Mapper().CreateMapper());
+            var testee = new PurchaseItemAction(purchaseItemDbAccessMock.Object, TestMapper.Create());
 
             testee.CreatePurchaseItem(newPurchaseItemDto);
 
@@ -35,10 +36,10 @@ namespace Tests.UnitTests.BizLogic
             var deletePurchaseItemGroupDto = new DeletePurchaseItemDto(3);
             var purchaseItemDbAccessMock = new Mock<IPurchaseItemDbAccess>();
             purchaseItemDbAccessMock.Setup(x => x.GetPurchaseItem(3))
-                                    .Returns(new PurchaseItem(new Article("Tomato", new ArticleGroup("Vegetables"), false),
+                                    .Returns(new PurchaseItem(new Article{Name="Tomato", ArticleGroup = new ArticleGroup("Vegetables"), IsInventory = false},
                                                               2,
                                                               new Unit("Piece")));
-            var testee = new PurchaseItemAction(purchaseItemDbAccessMock.Object, new Mapper().CreateMapper());
+            var testee = new PurchaseItemAction(purchaseItemDbAccessMock.Object, TestMapper.Create());
 
             testee.DeletePurchaseItem(deletePurchaseItemGroupDto);
 

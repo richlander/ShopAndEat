@@ -13,8 +13,8 @@ namespace Tests.UnitTests.BizLogic
         public void GenerateComponents()
         {
             var vegetables = new ArticleGroup("Vegetables");
-            var tomato = new Article("Tomato", vegetables, false);
-            var salad = new Article("Salad", vegetables, false);
+            var tomato = new Article{Name="Tomato", ArticleGroup = vegetables, IsInventory = false};
+            var salad = new Article{Name="Salad", ArticleGroup = vegetables, IsInventory = false};
             var bag = new Unit("Bag");
             var piece = new Unit("Piece");
             var ingredient1 = new Ingredient(tomato, 2, bag);

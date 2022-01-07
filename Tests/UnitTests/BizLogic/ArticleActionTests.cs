@@ -6,6 +6,7 @@ using DTO.Article;
 using DTO.ArticleGroup;
 using Moq;
 using NUnit.Framework;
+using Tests.Doubles;
 
 namespace Tests.UnitTests.BizLogic
 {
@@ -17,7 +18,7 @@ namespace Tests.UnitTests.BizLogic
         {
             var newArticleDto = new NewArticleDto("Cheese", new ExistingArticleGroupDto(3, "Diary"), true);
             var articleDbAccessMock = new Mock<IArticleDbAccess>();
-            var testee = new ArticleAction(articleDbAccessMock.Object, new Mapper().CreateMapper());
+            var testee = new ArticleAction(articleDbAccessMock.Object, TestMapper.Create());
 
             testee.CreateArticle(newArticleDto);
 
@@ -29,8 +30,8 @@ namespace Tests.UnitTests.BizLogic
         {
             var deleteArticleGroupDto = new DeleteArticleDto(3);
             var articleDbAccessMock = new Mock<IArticleDbAccess>();
-            articleDbAccessMock.Setup(x => x.GetArticle(3)).Returns(new Article("Cheese", new ArticleGroup("Diary"), false));
-            var testee = new ArticleAction(articleDbAccessMock.Object, new Mapper().CreateMapper());
+            articleDbAccessMock.Setup(x => x.GetArticle(3)).Returns(new Article{Name = "Cheese", ArticleGroup = new ArticleGroup("Diary"),IsInventory = false});
+            var testee = new ArticleAction(articleDbAccessMock.Object, TestMapper.Create());
 
             testee.DeleteArticle(deleteArticleGroupDto);
 
@@ -41,7 +42,7 @@ namespace Tests.UnitTests.BizLogic
         public void GetAllArticles()
         {
             var articleDbAccessMock = new Mock<IArticleDbAccess>();
-            var testee = new ArticleAction(articleDbAccessMock.Object, new Mapper().CreateMapper());
+            var testee = new ArticleAction(articleDbAccessMock.Object, TestMapper.Create());
 
             testee.GetAllArticles();
 

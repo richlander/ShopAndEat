@@ -12,7 +12,7 @@ namespace Tests.UnitTests.DataLayer.EfClasses
         {
             var name = "Lunch";
 
-            var testee = new MealType(name);
+            var testee = new MealType(name, 1);
 
             testee.Name.Should().Be(name);
         }

@@ -4,6 +4,7 @@ using DTO.Unit;
 using FluentAssertions;
 using NUnit.Framework;
 using ServiceLayer.Concrete;
+using Tests.Doubles;
 
 namespace Tests.UnitTests.ServiceLayer
 {
@@ -14,7 +15,7 @@ namespace Tests.UnitTests.ServiceLayer
         public void CreateUnit()
         {
             using var context = new InMemoryDbContext();
-            var testee = new UnitService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new UnitService(new SimpleCrudHelper(context, TestMapper.Create()));
             var newUnitDto = new NewUnitDto("Piece");
 
             testee.CreateUnit(newUnitDto);
@@ -28,7 +29,7 @@ namespace Tests.UnitTests.ServiceLayer
             using var context = new InMemoryDbContext();
             var existingUnit = context.Units.Add(new Unit("Piece"));
             context.SaveChanges();
-            var testee = new UnitService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new UnitService(new SimpleCrudHelper(context, TestMapper.Create()));
             var deleteUnitDto = new DeleteUnitDto(existingUnit.Entity.UnitId);
 
             testee.DeleteUnit(deleteUnitDto);
@@ -43,7 +44,7 @@ namespace Tests.UnitTests.ServiceLayer
             context.Units.Add(new Unit("Piece"));
             context.Units.Add(new Unit("Bag"));
             context.SaveChanges();
-            var testee = new UnitService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new UnitService(new SimpleCrudHelper(context, TestMapper.Create()));
 
             var results = testee.GetAllUnits();
 

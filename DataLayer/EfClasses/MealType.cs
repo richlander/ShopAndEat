@@ -14,9 +14,9 @@ namespace DataLayer.EfClasses
         {
         }
 
-        public string Name { get; [UsedImplicitly] private set; }
+        public string Name { get; set; }
 
-        public int Order { get; [UsedImplicitly] private set; }
+        public int Order { get; set; }
 
         public int MealTypeId { get; [UsedImplicitly] private set; }
     }

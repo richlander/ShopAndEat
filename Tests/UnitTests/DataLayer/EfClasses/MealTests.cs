@@ -12,7 +12,7 @@ namespace Tests.UnitTests.DataLayer.EfClasses
         public void CreateMeal()
         {
             var day = new DateTime();
-            var mealType = new MealType("Lunch");
+            var mealType = new MealType("Lunch", 1);
             var recipe = new Recipe("Soup", 3, new Ingredient[] { });
 
             var testee = new Meal(day, mealType, recipe);

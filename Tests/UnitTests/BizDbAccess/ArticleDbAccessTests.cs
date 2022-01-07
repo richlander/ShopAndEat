@@ -13,7 +13,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = inMemoryDbContext.ArticleGroups.Add(new ArticleGroup("Vegetables"));
-            var tomato = inMemoryDbContext.Articles.Add(new Article("Tomato", vegetables.Entity, false));
+            var tomato = inMemoryDbContext.Articles.Add(new Article{Name="Tomato", ArticleGroup = vegetables.Entity, IsInventory = false});
             inMemoryDbContext.SaveChanges();
             var testee = new ArticleDbAccess(inMemoryDbContext);
 
@@ -27,7 +27,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = inMemoryDbContext.ArticleGroups.Add(new ArticleGroup("Vegetables"));
-            inMemoryDbContext.Articles.Add(new Article("Tomato", vegetables.Entity, false));
+            inMemoryDbContext.Articles.Add(new Article{Name="Tomato", ArticleGroup = vegetables.Entity, IsInventory = false});
             inMemoryDbContext.SaveChanges();
             var testee = new ArticleDbAccess(inMemoryDbContext);
 
@@ -44,7 +44,7 @@ namespace Tests.UnitTests.BizDbAccess
             inMemoryDbContext.SaveChanges();
             var testee = new ArticleDbAccess(inMemoryDbContext);
 
-            testee.AddArticle(new Article("Tomato", vegetables.Entity, false));
+            testee.AddArticle(new Article{Name="Tomato", ArticleGroup = vegetables.Entity, IsInventory = false});
             inMemoryDbContext.SaveChanges();
 
             inMemoryDbContext.Articles.Should().Contain(x => x.Name == "Tomato");
@@ -55,7 +55,7 @@ namespace Tests.UnitTests.BizDbAccess
         {
             using var inMemoryDbContext = new InMemoryDbContext();
             var vegetables = inMemoryDbContext.ArticleGroups.Add(new ArticleGroup("Vegetables"));
-            var tomato = inMemoryDbContext.Articles.Add(new Article("Tomato", vegetables.Entity, false));
+            var tomato = inMemoryDbContext.Articles.Add(new Article{Name="Tomato", ArticleGroup = vegetables.Entity, IsInventory = false});
             inMemoryDbContext.SaveChanges();
             var testee = new ArticleDbAccess(inMemoryDbContext);
 

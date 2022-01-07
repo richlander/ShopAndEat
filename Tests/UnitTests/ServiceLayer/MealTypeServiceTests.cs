@@ -4,6 +4,7 @@ using DTO.MealType;
 using FluentAssertions;
 using NUnit.Framework;
 using ServiceLayer.Concrete;
+using Tests.Doubles;
 
 namespace Tests.UnitTests.ServiceLayer
 {
@@ -14,7 +15,7 @@ namespace Tests.UnitTests.ServiceLayer
         public void CreateMealType()
         {
             using var context = new InMemoryDbContext();
-            var testee = new MealTypeService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new MealTypeService(new SimpleCrudHelper(context, TestMapper.Create()));
             var newMealTypeDto = new NewMealTypeDto("Lunch");
 
             testee.CreateMealType(newMealTypeDto);
@@ -26,9 +27,9 @@ namespace Tests.UnitTests.ServiceLayer
         public void DeleteMealType()
         {
             using var context = new InMemoryDbContext();
-            var existingMealType = context.MealTypes.Add(new MealType("Lunch"));
+            var existingMealType = context.MealTypes.Add(new MealType("Lunch", 1));
             context.SaveChanges();
-            var testee = new MealTypeService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new MealTypeService(new SimpleCrudHelper(context, TestMapper.Create()));
             var deleteMealTypeDto = new DeleteMealTypeDto(existingMealType.Entity.MealTypeId);
 
             testee.DeleteMealType(deleteMealTypeDto);
@@ -40,10 +41,10 @@ namespace Tests.UnitTests.ServiceLayer
         public void GetAllMealTypes()
         {
             using var context = new InMemoryDbContext();
-            context.MealTypes.Add(new MealType("Lunch"));
-            context.MealTypes.Add(new MealType("Breakfast"));
+            context.MealTypes.Add(new MealType("Lunch", 1));
+            context.MealTypes.Add(new MealType("Breakfast", 2));
             context.SaveChanges();
-            var testee = new MealTypeService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new MealTypeService(new SimpleCrudHelper(context, TestMapper.Create()));
 
             var results = testee.GetAllMealTypes();
 

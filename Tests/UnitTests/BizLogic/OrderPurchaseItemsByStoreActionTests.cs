@@ -14,8 +14,8 @@ namespace Tests.UnitTests.BizLogic
         {
             var dairy = new ArticleGroup("Dairy");
             var vegetables = new ArticleGroup("Vegetables");
-            var tomato = new Article("Tomato", vegetables, false);
-            var milk = new Article("Milk", dairy, false);
+            var tomato = new Article{Name="Tomato", ArticleGroup = vegetables, IsInventory = false};
+            var milk = new Article{Name="Milk", ArticleGroup = dairy, IsInventory = false};
             var bag = new Unit("Bag");
             var purchaseItem1 = new PurchaseItem(tomato, 1, bag);
             var purchaseItem2 = new PurchaseItem(milk, 3, bag);
@@ -29,7 +29,7 @@ namespace Tests.UnitTests.BizLogic
             var results = testee.OrderPurchaseItemsByStore(store, purchaseItems).ToList();
 
             results.Should().HaveCount(2);
-            results.Should().BeEquivalentTo(purchaseItem2, purchaseItem1);
+            results.Should().BeEquivalentTo(new []{purchaseItem2, purchaseItem1});
         }
     }
 }

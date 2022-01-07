@@ -4,6 +4,7 @@ using DTO.ArticleGroup;
 using FluentAssertions;
 using NUnit.Framework;
 using ServiceLayer.Concrete;
+using Tests.Doubles;
 
 namespace Tests.UnitTests.ServiceLayer
 {
@@ -14,7 +15,7 @@ namespace Tests.UnitTests.ServiceLayer
         public void CreateArticleGroup()
         {
             using var context = new InMemoryDbContext();
-            var testee = new ArticleGroupService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new ArticleGroupService(new SimpleCrudHelper(context, TestMapper.Create()));
             var newArticleGroupDto = new NewArticleGroupDto("Vegetables");
 
             testee.CreateArticleGroup(newArticleGroupDto);
@@ -28,7 +29,7 @@ namespace Tests.UnitTests.ServiceLayer
             using var context = new InMemoryDbContext();
             var existingArticleGroup = context.ArticleGroups.Add(new ArticleGroup("Vegetables"));
             context.SaveChanges();
-            var testee = new ArticleGroupService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new ArticleGroupService(new SimpleCrudHelper(context, TestMapper.Create()));
             var deleteArticleGroupDto = new DeleteArticleGroupDto(existingArticleGroup.Entity.ArticleGroupId);
 
             testee.DeleteArticleGroup(deleteArticleGroupDto);
@@ -43,7 +44,7 @@ namespace Tests.UnitTests.ServiceLayer
             context.ArticleGroups.Add(new ArticleGroup("Vegetables"));
             context.ArticleGroups.Add(new ArticleGroup("Dairy"));
             context.SaveChanges();
-            var testee = new ArticleGroupService(new SimpleCrudHelper(context, new Mapper().CreateMapper()));
+            var testee = new ArticleGroupService(new SimpleCrudHelper(context, TestMapper.Create()));
 
             var results = testee.GetAllArticleGroups();
 
