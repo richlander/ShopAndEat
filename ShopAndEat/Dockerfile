@@ -1,11 +1,12 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-ARG BASE_IMAGE=mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim-arm32v7
+ARG BASE_IMAGE=mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim
 FROM ${BASE_IMAGE} AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ShopAndEat/ShopAndEat.csproj", "ShopAndEat/"]
 COPY ["BizDbAccess/BizDbAccess.csproj", "BizDbAccess/"]
