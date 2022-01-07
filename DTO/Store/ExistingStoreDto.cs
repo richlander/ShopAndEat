@@ -1,15 +1,14 @@
-﻿namespace DTO.Store
+﻿namespace DTO.Store;
+
+public class ExistingStoreDto
 {
-    public class ExistingStoreDto
+    public ExistingStoreDto(int storeId, string name)
     {
-        public ExistingStoreDto(int storeId, string name)
-        {
-            StoreId = storeId;
-            Name = name;
-        }
-
-        public int StoreId { get; }
-
-        public string Name { get; }
+        StoreId = storeId;
+        Name = name;
     }
+
+    public int StoreId { get; }
+
+    public string Name { get; }
 }

@@ -2,19 +2,18 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Tests.UnitTests.DataLayer.EfClasses
+namespace Tests.UnitTests.DataLayer.EfClasses;
+
+[TestFixture]
+public class UnitTests
 {
-    [TestFixture]
-    public class UnitTests
+    [Test]
+    public void CreateUnit()
     {
-        [Test]
-        public void CreateUnit()
-        {
-            var name = "Liter";
+        var name = "Liter";
 
-            var testee = new Unit(name);
+        var testee = new Unit(name);
 
-            testee.Name.Should().Be(name);
-        }
+        testee.Name.Should().Be(name);
     }
 }

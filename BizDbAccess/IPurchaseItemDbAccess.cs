@@ -1,13 +1,12 @@
 ﻿using DataLayer.EfClasses;
 
-namespace BizDbAccess
+namespace BizDbAccess;
+
+public interface IPurchaseItemDbAccess
 {
-    public interface IPurchaseItemDbAccess
-    {
-        PurchaseItem AddPurchaseItem(PurchaseItem purchaseItem);
+    PurchaseItem AddPurchaseItem(PurchaseItem purchaseItem);
 
-        void DeletePurchaseItem(PurchaseItem purchaseItem);
+    void DeletePurchaseItem(PurchaseItem purchaseItem);
 
-        PurchaseItem GetPurchaseItem(int purchaseItemId);
-    }
+    PurchaseItem GetPurchaseItem(int purchaseItemId);
 }

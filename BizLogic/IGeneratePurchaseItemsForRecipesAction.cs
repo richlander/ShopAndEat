@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using DataLayer.EfClasses;
 
-namespace BizLogic
+namespace BizLogic;
+
+public interface IGeneratePurchaseItemsForRecipesAction
 {
-    public interface IGeneratePurchaseItemsForRecipesAction
-    {
-        IEnumerable<PurchaseItem> GeneratePurchaseItems(IEnumerable<Recipe> recipes);
-    }
+    IEnumerable<PurchaseItem> GeneratePurchaseItems(IEnumerable<Recipe> recipes);
 }

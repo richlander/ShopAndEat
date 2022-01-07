@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using DataLayer.EfClasses;
 
-namespace BizLogic
+namespace BizLogic;
+
+public interface IGetRecipesForMealsAction
 {
-    public interface IGetRecipesForMealsAction
-    {
-        IEnumerable<Recipe> GetRecipesForMeals(IEnumerable<Meal> meals);
-    }
+    IEnumerable<Recipe> GetRecipesForMeals(IEnumerable<Meal> meals);
 }

@@ -2,19 +2,18 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Tests.UnitTests.DataLayer.EfClasses
+namespace Tests.UnitTests.DataLayer.EfClasses;
+
+[TestFixture]
+public class MealTypeTests
 {
-    [TestFixture]
-    public class MealTypeTests
+    [Test]
+    public void CreateMealType()
     {
-        [Test]
-        public void CreateMealType()
-        {
-            var name = "Lunch";
+        var name = "Lunch";
 
-            var testee = new MealType(name, 1);
+        var testee = new MealType(name, 1);
 
-            testee.Name.Should().Be(name);
-        }
+        testee.Name.Should().Be(name);
     }
 }

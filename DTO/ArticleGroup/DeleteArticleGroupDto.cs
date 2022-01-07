@@ -1,12 +1,11 @@
-﻿namespace DTO.ArticleGroup
-{
-    public class DeleteArticleGroupDto
-    {
-        public DeleteArticleGroupDto(int articleGroupId)
-        {
-            ArticleGroupId = articleGroupId;
-        }
+﻿namespace DTO.ArticleGroup;
 
-        public int ArticleGroupId { get; }
+public class DeleteArticleGroupDto
+{
+    public DeleteArticleGroupDto(int articleGroupId)
+    {
+        ArticleGroupId = articleGroupId;
     }
+
+    public int ArticleGroupId { get; }
 }

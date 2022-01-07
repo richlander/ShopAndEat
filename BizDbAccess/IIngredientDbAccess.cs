@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using DataLayer.EfClasses;
 
-namespace BizDbAccess
+namespace BizDbAccess;
+
+public interface IIngredientDbAccess
 {
-    public interface IIngredientDbAccess
-    {
-        Ingredient AddIngredient(Ingredient ingredient);
+    Ingredient AddIngredient(Ingredient ingredient);
 
-        void DeleteIngredient(Ingredient ingredient);
+    void DeleteIngredient(Ingredient ingredient);
 
-        Ingredient GetIngredient(int ingredientId);
+    Ingredient GetIngredient(int ingredientId);
 
-        IEnumerable<Ingredient> GetIngredients();
-    }
+    IEnumerable<Ingredient> GetIngredients();
 }

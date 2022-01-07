@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using DTO.MealType;
 
-namespace ServiceLayer
+namespace ServiceLayer;
+
+public interface IMealTypeService
 {
-    public interface IMealTypeService
-    {
-        ExistingMealTypeDto CreateMealType(NewMealTypeDto newArticleGroupDto);
+    ExistingMealTypeDto CreateMealType(NewMealTypeDto newArticleGroupDto);
 
-        void DeleteMealType(DeleteMealTypeDto deleteArticleGroupDto);
+    void DeleteMealType(DeleteMealTypeDto deleteArticleGroupDto);
 
-        IEnumerable<ExistingMealTypeDto> GetAllMealTypes();
-    }
+    IEnumerable<ExistingMealTypeDto> GetAllMealTypes();
 }

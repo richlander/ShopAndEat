@@ -2,23 +2,22 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Tests.UnitTests.DataLayer.EfClasses
+namespace Tests.UnitTests.DataLayer.EfClasses;
+
+[TestFixture]
+public class IngredientTests
 {
-    [TestFixture]
-    public class IngredientTests
+    [Test]
+    public void CreateIngredient()
     {
-        [Test]
-        public void CreateIngredient()
-        {
-            var article = new Article{Name="Tomato", ArticleGroup = new ArticleGroup("Vegetables"), IsInventory = false};
-            uint quantity = 3;
-            var unit = new Unit("Bag");
+        var article = new Article{Name="Tomato", ArticleGroup = new ArticleGroup("Vegetables"), IsInventory = false};
+        uint quantity = 3;
+        var unit = new Unit("Bag");
 
-            var testee = new Ingredient(article, quantity, unit);
+        var testee = new Ingredient(article, quantity, unit);
 
-            testee.Article.Should().Be(article);
-            testee.Quantity.Should().Be(quantity);
-            testee.Unit.Should().Be(unit);
-        }
+        testee.Article.Should().Be(article);
+        testee.Quantity.Should().Be(quantity);
+        testee.Unit.Should().Be(unit);
     }
 }

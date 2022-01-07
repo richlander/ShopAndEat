@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using DataLayer.EfClasses;
 
-namespace BizDbAccess
+namespace BizDbAccess;
+
+public interface IArticleDbAccess
 {
-    public interface IArticleDbAccess
-    {
-        Article AddArticle(Article article);
+    Article AddArticle(Article article);
 
-        void DeleteArticle(Article article);
+    void DeleteArticle(Article article);
 
-        Article GetArticle(int articleId);
+    Article GetArticle(int articleId);
 
-        IEnumerable<Article> GetArticles();
-    }
+    IEnumerable<Article> GetArticles();
 }

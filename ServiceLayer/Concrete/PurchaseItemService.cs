@@ -2,34 +2,33 @@
 using DataLayer.EF;
 using DTO.PurchaseItem;
 
-namespace ServiceLayer.Concrete
+namespace ServiceLayer.Concrete;
+
+public class PurchaseItemService : IPurchaseItemService
 {
-    public class PurchaseItemService : IPurchaseItemService
+    public PurchaseItemService(IPurchaseItemAction purchaseItemAction, EfCoreContext context)
     {
-        public PurchaseItemService(IPurchaseItemAction purchaseItemAction, EfCoreContext context)
-        {
-            PurchaseItemAction = purchaseItemAction;
-            Context = context;
-        }
+        PurchaseItemAction = purchaseItemAction;
+        Context = context;
+    }
 
-        private IPurchaseItemAction PurchaseItemAction { get; }
+    private IPurchaseItemAction PurchaseItemAction { get; }
 
-        private EfCoreContext Context { get; }
+    private EfCoreContext Context { get; }
 
-        /// <inheritdoc />
-        public ExistingPurchaseItemDto CreatePurchaseItem(NewPurchaseItemDto newPurchaseItemDto)
-        {
-            var createdPurchaseItemDto = PurchaseItemAction.CreatePurchaseItem(newPurchaseItemDto);
-            Context.SaveChanges();
+    /// <inheritdoc />
+    public ExistingPurchaseItemDto CreatePurchaseItem(NewPurchaseItemDto newPurchaseItemDto)
+    {
+        var createdPurchaseItemDto = PurchaseItemAction.CreatePurchaseItem(newPurchaseItemDto);
+        Context.SaveChanges();
 
-            return createdPurchaseItemDto;
-        }
+        return createdPurchaseItemDto;
+    }
 
-        /// <inheritdoc />
-        public void DeletePurchaseItem(DeletePurchaseItemDto deletePurchaseItemDto)
-        {
-            PurchaseItemAction.DeletePurchaseItem(deletePurchaseItemDto);
-            Context.SaveChanges();
-        }
+    /// <inheritdoc />
+    public void DeletePurchaseItem(DeletePurchaseItemDto deletePurchaseItemDto)
+    {
+        PurchaseItemAction.DeletePurchaseItem(deletePurchaseItemDto);
+        Context.SaveChanges();
     }
 }

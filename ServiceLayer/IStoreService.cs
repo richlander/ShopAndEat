@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using DTO.Store;
 
-namespace ServiceLayer
+namespace ServiceLayer;
+
+public interface IStoreService
 {
-    public interface IStoreService
-    {
-        IEnumerable<ExistingStoreDto> GetAllStores();
-    }
+    IEnumerable<ExistingStoreDto> GetAllStores();
 }

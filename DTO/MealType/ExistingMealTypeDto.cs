@@ -1,18 +1,17 @@
-﻿namespace DTO.MealType
+﻿namespace DTO.MealType;
+
+public class ExistingMealTypeDto
 {
-    public class ExistingMealTypeDto
+    public ExistingMealTypeDto(string name, int mealTypeId, int order)
     {
-        public ExistingMealTypeDto(string name, int mealTypeId, int order)
-        {
-            Name = name;
-            MealTypeId = mealTypeId;
-            Order = order;
-        }
-
-        public string Name { get; }
-
-        public int MealTypeId { get; }
-
-        public int Order { get; }
+        Name = name;
+        MealTypeId = mealTypeId;
+        Order = order;
     }
+
+    public string Name { get; }
+
+    public int MealTypeId { get; }
+
+    public int Order { get; }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using DTO.Article;
 
-namespace BizLogic
+namespace BizLogic;
+
+public interface IArticleAction
 {
-    public interface IArticleAction
-    {
-        ExistingArticleDto CreateArticle(NewArticleDto newArticleDto);
+    ExistingArticleDto CreateArticle(NewArticleDto newArticleDto);
 
-        void DeleteArticle(DeleteArticleDto deleteArticleDto);
+    void DeleteArticle(DeleteArticleDto deleteArticleDto);
 
-        IEnumerable<ExistingArticleDto> GetAllArticles();
-    }
+    IEnumerable<ExistingArticleDto> GetAllArticles();
 }

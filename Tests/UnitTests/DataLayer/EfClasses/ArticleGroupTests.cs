@@ -2,19 +2,18 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Tests.UnitTests.DataLayer.EfClasses
+namespace Tests.UnitTests.DataLayer.EfClasses;
+
+[TestFixture]
+public class ArticleGroupTests
 {
-    [TestFixture]
-    public class ArticleGroupTests
+    [Test]
+    public void CreateArticleGroup()
     {
-        [Test]
-        public void CreateArticleGroup()
-        {
-            var name = "Gemüse";
+        var name = "Gemüse";
 
-            var testee = new ArticleGroup(name);
+        var testee = new ArticleGroup(name);
 
-            testee.Name.Should().Be(name);
-        }
+        testee.Name.Should().Be(name);
     }
 }

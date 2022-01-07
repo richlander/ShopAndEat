@@ -1,12 +1,11 @@
-﻿namespace DTO.Unit
-{
-    public class DeleteUnitDto
-    {
-        public DeleteUnitDto(int unitId)
-        {
-            UnitId = unitId;
-        }
+﻿namespace DTO.Unit;
 
-        public int UnitId { get; }
+public class DeleteUnitDto
+{
+    public DeleteUnitDto(int unitId)
+    {
+        UnitId = unitId;
     }
+
+    public int UnitId { get; }
 }

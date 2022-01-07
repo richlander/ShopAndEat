@@ -2,14 +2,13 @@
 using DataLayer.EF;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tests
+namespace Tests;
+
+public class InMemoryDbContext : EfCoreContext
 {
-    public class InMemoryDbContext : EfCoreContext
+    /// <inheritdoc />
+    public InMemoryDbContext()
+        : base(new DbContextOptionsBuilder<EfCoreContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options)
     {
-        /// <inheritdoc />
-        public InMemoryDbContext()
-            : base(new DbContextOptionsBuilder<EfCoreContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options)
-        {
-        }
     }
 }

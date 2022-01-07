@@ -1,12 +1,11 @@
-﻿namespace DTO.MealType
-{
-    public class NewMealTypeDto
-    {
-        public NewMealTypeDto(string name)
-        {
-            Name = name;
-        }
+﻿namespace DTO.MealType;
 
-        public string Name { get; }
+public class NewMealTypeDto
+{
+    public NewMealTypeDto(string name)
+    {
+        Name = name;
     }
+
+    public string Name { get; }
 }

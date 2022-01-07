@@ -3,33 +3,32 @@ using BizDbAccess;
 using DataLayer.EfClasses;
 using DTO.PurchaseItem;
 
-namespace BizLogic.Concrete
+namespace BizLogic.Concrete;
+
+public class PurchaseItemAction : IPurchaseItemAction
 {
-    public class PurchaseItemAction : IPurchaseItemAction
+    public PurchaseItemAction(IPurchaseItemDbAccess ingredientDbAccess, IMapper mapper)
     {
-        public PurchaseItemAction(IPurchaseItemDbAccess ingredientDbAccess, IMapper mapper)
-        {
-            PurchaseItemDbAccess = ingredientDbAccess;
-            Mapper = mapper;
-        }
+        PurchaseItemDbAccess = ingredientDbAccess;
+        Mapper = mapper;
+    }
 
-        private IPurchaseItemDbAccess PurchaseItemDbAccess { get; }
+    private IPurchaseItemDbAccess PurchaseItemDbAccess { get; }
 
-        private IMapper Mapper { get; }
+    private IMapper Mapper { get; }
 
-        /// <inheritdoc />
-        public ExistingPurchaseItemDto CreatePurchaseItem(NewPurchaseItemDto newPurchaseItemDto)
-        {
-            var newPurchaseItem = Mapper.Map<PurchaseItem>(newPurchaseItemDto);
-            var createdPurchaseItem = PurchaseItemDbAccess.AddPurchaseItem(newPurchaseItem);
+    /// <inheritdoc />
+    public ExistingPurchaseItemDto CreatePurchaseItem(NewPurchaseItemDto newPurchaseItemDto)
+    {
+        var newPurchaseItem = Mapper.Map<PurchaseItem>(newPurchaseItemDto);
+        var createdPurchaseItem = PurchaseItemDbAccess.AddPurchaseItem(newPurchaseItem);
 
-            return Mapper.Map<ExistingPurchaseItemDto>(createdPurchaseItem);
-        }
+        return Mapper.Map<ExistingPurchaseItemDto>(createdPurchaseItem);
+    }
 
-        /// <inheritdoc />
-        public void DeletePurchaseItem(DeletePurchaseItemDto deletePurchaseItemDto)
-        {
-            PurchaseItemDbAccess.DeletePurchaseItem(PurchaseItemDbAccess.GetPurchaseItem(deletePurchaseItemDto.PurchaseItemId));
-        }
+    /// <inheritdoc />
+    public void DeletePurchaseItem(DeletePurchaseItemDto deletePurchaseItemDto)
+    {
+        PurchaseItemDbAccess.DeletePurchaseItem(PurchaseItemDbAccess.GetPurchaseItem(deletePurchaseItemDto.PurchaseItemId));
     }
 }

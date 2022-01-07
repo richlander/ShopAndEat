@@ -3,23 +3,22 @@ using DataLayer.EfClasses;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Tests.UnitTests.DataLayer.EfClasses
+namespace Tests.UnitTests.DataLayer.EfClasses;
+
+[TestFixture]
+public class MealTests
 {
-    [TestFixture]
-    public class MealTests
+    [Test]
+    public void CreateMeal()
     {
-        [Test]
-        public void CreateMeal()
-        {
-            var day = new DateTime();
-            var mealType = new MealType("Lunch", 1);
-            var recipe = new Recipe("Soup", 3, new Ingredient[] { });
+        var day = new DateTime();
+        var mealType = new MealType("Lunch", 1);
+        var recipe = new Recipe("Soup", 3, new Ingredient[] { });
 
-            var testee = new Meal(day, mealType, recipe);
+        var testee = new Meal(day, mealType, recipe);
 
-            testee.Day.Should().Be(day);
-            testee.MealType.Should().Be(mealType);
-            testee.Recipe.Should().Be(recipe);
-        }
+        testee.Day.Should().Be(day);
+        testee.MealType.Should().Be(mealType);
+        testee.Recipe.Should().Be(recipe);
     }
 }

@@ -1,11 +1,10 @@
 ﻿using DTO.PurchaseItem;
 
-namespace ServiceLayer
-{
-    internal interface IPurchaseItemService
-    {
-        ExistingPurchaseItemDto CreatePurchaseItem(NewPurchaseItemDto newPurchaseItemDto);
+namespace ServiceLayer;
 
-        void DeletePurchaseItem(DeletePurchaseItemDto deletePurchaseItemDto);
-    }
+internal interface IPurchaseItemService
+{
+    ExistingPurchaseItemDto CreatePurchaseItem(NewPurchaseItemDto newPurchaseItemDto);
+
+    void DeletePurchaseItem(DeletePurchaseItemDto deletePurchaseItemDto);
 }

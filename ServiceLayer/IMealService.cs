@@ -4,18 +4,17 @@ using DTO.PurchaseItem;
 using DTO.Recipe;
 using DTO.Store;
 
-namespace ServiceLayer
+namespace ServiceLayer;
+
+public interface IMealService
 {
-    public interface IMealService
-    {
-        ExistingMealDto CreateMeal(NewMealDto newMealDto);
+    ExistingMealDto CreateMeal(NewMealDto newMealDto);
 
-        IEnumerable<ExistingMealDto> GetFutureMeals();
+    IEnumerable<ExistingMealDto> GetFutureMeals();
 
-        IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(IEnumerable<ExistingRecipeDto> recipes, ExistingStoreDto store);
+    IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(IEnumerable<ExistingRecipeDto> recipes, ExistingStoreDto store);
         
-        IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(ExistingStoreDto store);
+    IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(ExistingStoreDto store);
 
-        void DeleteMeal(DeleteMealDto mealToDelete);
-    }
+    void DeleteMeal(DeleteMealDto mealToDelete);
 }

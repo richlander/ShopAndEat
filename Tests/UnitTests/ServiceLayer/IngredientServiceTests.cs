@@ -7,50 +7,49 @@ using Moq;
 using NUnit.Framework;
 using ServiceLayer.Concrete;
 
-namespace Tests.UnitTests.ServiceLayer
+namespace Tests.UnitTests.ServiceLayer;
+
+[TestFixture]
+public class IngredientServiceTests
 {
-    [TestFixture]
-    public class IngredientServiceTests
+    [Test]
+    public void CreateIngredient()
     {
-        [Test]
-        public void CreateIngredient()
-        {
-            using var context = new InMemoryDbContext();
-            var newIngredientDto =
-                new NewIngredientDto(new ExistingArticleDto(1, "Tomato", new ExistingArticleGroupDto(1, "Vegetables"), false),
-                                     2,
-                                     new ExistingUnitDto(1, "Piece"));
-            var ingredientActionMock = new Mock<IIngredientAction>();
-            var testee = new IngredientService(ingredientActionMock.Object, context);
+        using var context = new InMemoryDbContext();
+        var newIngredientDto =
+            new NewIngredientDto(new ExistingArticleDto(1, "Tomato", new ExistingArticleGroupDto(1, "Vegetables"), false),
+                                 2,
+                                 new ExistingUnitDto(1, "Piece"));
+        var ingredientActionMock = new Mock<IIngredientAction>();
+        var testee = new IngredientService(ingredientActionMock.Object, context);
 
-            testee.CreateIngredient(newIngredientDto);
+        testee.CreateIngredient(newIngredientDto);
 
-            ingredientActionMock.Verify(x => x.CreateIngredient(newIngredientDto), Times.Once);
-        }
+        ingredientActionMock.Verify(x => x.CreateIngredient(newIngredientDto), Times.Once);
+    }
 
-        [Test]
-        public void DeleteIngredient()
-        {
-            using var context = new InMemoryDbContext();
-            var deleteIngredientGroupDto = new DeleteIngredientDto(3);
-            var ingredientActionMock = new Mock<IIngredientAction>();
-            var testee = new IngredientService(ingredientActionMock.Object, context);
+    [Test]
+    public void DeleteIngredient()
+    {
+        using var context = new InMemoryDbContext();
+        var deleteIngredientGroupDto = new DeleteIngredientDto(3);
+        var ingredientActionMock = new Mock<IIngredientAction>();
+        var testee = new IngredientService(ingredientActionMock.Object, context);
 
-            testee.DeleteIngredient(deleteIngredientGroupDto);
+        testee.DeleteIngredient(deleteIngredientGroupDto);
 
-            ingredientActionMock.Verify(x => x.DeleteIngredient(deleteIngredientGroupDto), Times.Once);
-        }
+        ingredientActionMock.Verify(x => x.DeleteIngredient(deleteIngredientGroupDto), Times.Once);
+    }
 
-        [Test]
-        public void GetAllIngredients()
-        {
-            using var context = new InMemoryDbContext();
-            var ingredientActionMock = new Mock<IIngredientAction>();
-            var testee = new IngredientService(ingredientActionMock.Object, context);
+    [Test]
+    public void GetAllIngredients()
+    {
+        using var context = new InMemoryDbContext();
+        var ingredientActionMock = new Mock<IIngredientAction>();
+        var testee = new IngredientService(ingredientActionMock.Object, context);
 
-            testee.GetAllIngredients();
+        testee.GetAllIngredients();
 
-            ingredientActionMock.Verify(x => x.GetAllIngredients(), Times.Once);
-        }
+        ingredientActionMock.Verify(x => x.GetAllIngredients(), Times.Once);
     }
 }

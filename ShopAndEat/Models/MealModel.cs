@@ -1,32 +1,31 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ShopAndEat.Models
+namespace ShopAndEat.Models;
+
+public class MealModel
 {
-    public class MealModel
+    public MealModel()
     {
-        public MealModel()
-        {
-            Date = DateTime.Now;
-        }
-
-        [Required] public string RecipeName { get; set; }
-
-        [Required] public string MealTypeName { get; set; }
-
-        [Required] [FutureValidator] public DateTime Date { get; set; }
+        Date = DateTime.Now;
     }
 
-    public class FutureValidatorAttribute : ValidationAttribute
-    {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            if (value is DateTime timeStamp && timeStamp >= DateTime.Now)
-            {
-                return ValidationResult.Success;
-            }
+    [Required] public string RecipeName { get; set; }
 
-            return new ValidationResult("Must be in future", new[] { validationContext.MemberName });
+    [Required] public string MealTypeName { get; set; }
+
+    [Required] [FutureValidator] public DateTime Date { get; set; }
+}
+
+public class FutureValidatorAttribute : ValidationAttribute
+{
+    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    {
+        if (value is DateTime timeStamp && timeStamp >= DateTime.Now)
+        {
+            return ValidationResult.Success;
         }
+
+        return new ValidationResult("Must be in future", new[] { validationContext.MemberName });
     }
 }

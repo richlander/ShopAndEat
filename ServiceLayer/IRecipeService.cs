@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using DTO.Recipe;
 
-namespace ServiceLayer
+namespace ServiceLayer;
+
+public interface IRecipeService
 {
-    public interface IRecipeService
-    {
-        IEnumerable<ExistingRecipeDto> GetAllRecipes();
+    IEnumerable<ExistingRecipeDto> GetAllRecipes();
 
-        void CreateNewRecipe(NewRecipeDto newRecipe);
+    void CreateNewRecipe(NewRecipeDto newRecipe);
 
-        void DeleteRecipe(DeleteRecipeDto recipeToDelete);
+    void DeleteRecipe(DeleteRecipeDto recipeToDelete);
         
-        void UpdateRecipe(UpdateRecipeDto existingRecipeDto);
-    }
+    void UpdateRecipe(UpdateRecipeDto existingRecipeDto);
 }

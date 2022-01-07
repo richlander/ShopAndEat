@@ -1,4 +1,3 @@
-using AutoMapper;
 using BizDbAccess;
 using BizDbAccess.Concrete;
 using BizLogic;
@@ -14,71 +13,70 @@ using Microsoft.Extensions.Hosting;
 using ServiceLayer;
 using ServiceLayer.Concrete;
 
-namespace ShopAndEat
+namespace ShopAndEat;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        Configuration = configuration;
+    }
 
-        public IConfiguration Configuration { get; }
+    public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddRazorPages();
-            services.AddServerSideBlazor();
+    // This method gets called by the runtime. Use this method to add services to the container.
+    // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddRazorPages();
+        services.AddServerSideBlazor();
 
-            ConfigureShopAndEatServices(services);
+        ConfigureShopAndEatServices(services);
 
-            // TODO mu88: Move to config
-            services.AddDbContext<EfCoreContext>(options => options.UseLazyLoadingProxies().UseSqlite("Data Source=/db/ShopAndEat.db"));
-        }
+        // TODO mu88: Move to config
+        services.AddDbContext<EfCoreContext>(options => options.UseLazyLoadingProxies().UseSqlite("Data Source=/db/ShopAndEat.db"));
+    }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UsePathBase("/shopAndEat");
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UsePathBase("/shopAndEat");
             
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
-
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");
-            });
-        }
-
-        private void ConfigureShopAndEatServices(IServiceCollection services)
+        if (env.IsDevelopment())
         {
-            services.AddTransient<SimpleCrudHelper>();
-            services.AddTransient<IMealService, MealService>();
-            services.AddTransient<IStoreService, StoreService>();
-            services.AddTransient<IRecipeService, RecipeService>();
-            services.AddTransient<IMealTypeService, MealTypeService>();
-            services.AddTransient<IUnitService, UnitService>();
-            services.AddTransient<IArticleService, ArticleService>();
-            services.AddTransient<IArticleGroupService, ArticleGroupService>();
-            services.AddTransient<IArticleAction, ArticleAction>();
-            services.AddTransient<IArticleDbAccess, ArticleDbAccess>();
-            services.AddTransient<IGeneratePurchaseItemsForRecipesAction, GeneratePurchaseItemsForRecipesAction>();
-            services.AddTransient<IOrderPurchaseItemsByStoreAction, OrderPurchaseItemsByStoreAction>();
-            services.AddTransient<IGetRecipesForMealsAction, GetRecipesForMealsAction>();
-            services.AddAutoMapper(typeof(AutoMapperProfile));
+            app.UseDeveloperExceptionPage();
         }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+        }
+
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapBlazorHub();
+            endpoints.MapFallbackToPage("/_Host");
+        });
+    }
+
+    private void ConfigureShopAndEatServices(IServiceCollection services)
+    {
+        services.AddTransient<SimpleCrudHelper>();
+        services.AddTransient<IMealService, MealService>();
+        services.AddTransient<IStoreService, StoreService>();
+        services.AddTransient<IRecipeService, RecipeService>();
+        services.AddTransient<IMealTypeService, MealTypeService>();
+        services.AddTransient<IUnitService, UnitService>();
+        services.AddTransient<IArticleService, ArticleService>();
+        services.AddTransient<IArticleGroupService, ArticleGroupService>();
+        services.AddTransient<IArticleAction, ArticleAction>();
+        services.AddTransient<IArticleDbAccess, ArticleDbAccess>();
+        services.AddTransient<IGeneratePurchaseItemsForRecipesAction, GeneratePurchaseItemsForRecipesAction>();
+        services.AddTransient<IOrderPurchaseItemsByStoreAction, OrderPurchaseItemsByStoreAction>();
+        services.AddTransient<IGetRecipesForMealsAction, GetRecipesForMealsAction>();
+        services.AddAutoMapper(typeof(AutoMapperProfile));
     }
 }

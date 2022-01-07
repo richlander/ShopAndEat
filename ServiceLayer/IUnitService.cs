@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using DTO.Unit;
 
-namespace ServiceLayer
+namespace ServiceLayer;
+
+public interface IUnitService
 {
-    public interface IUnitService
-    {
-        ExistingUnitDto CreateUnit(NewUnitDto newArticleGroupDto);
+    ExistingUnitDto CreateUnit(NewUnitDto newArticleGroupDto);
 
-        void DeleteUnit(DeleteUnitDto deleteArticleGroupDto);
+    void DeleteUnit(DeleteUnitDto deleteArticleGroupDto);
 
-        IEnumerable<ExistingUnitDto> GetAllUnits();
-    }
+    IEnumerable<ExistingUnitDto> GetAllUnits();
 }

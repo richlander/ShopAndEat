@@ -2,21 +2,20 @@
 using DTO.MealType;
 using DTO.Recipe;
 
-namespace DTO.Meal
+namespace DTO.Meal;
+
+public class NewMealDto
 {
-    public class NewMealDto
+    public NewMealDto(DateTime day, ExistingMealTypeDto mealType, ExistingRecipeDto recipe)
     {
-        public NewMealDto(DateTime day, ExistingMealTypeDto mealType, ExistingRecipeDto recipe)
-        {
-            Day = day;
-            MealType = mealType;
-            Recipe = recipe;
-        }
-
-        public DateTime Day { get; }
-
-        public ExistingMealTypeDto MealType { get; }
-
-        public ExistingRecipeDto Recipe { get; }
+        Day = day;
+        MealType = mealType;
+        Recipe = recipe;
     }
+
+    public DateTime Day { get; }
+
+    public ExistingMealTypeDto MealType { get; }
+
+    public ExistingRecipeDto Recipe { get; }
 }

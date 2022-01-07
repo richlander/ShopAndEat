@@ -1,20 +1,19 @@
 ﻿using JetBrains.Annotations;
 
-namespace DataLayer.EfClasses
+namespace DataLayer.EfClasses;
+
+public class ArticleGroup
 {
-    public class ArticleGroup
+    public ArticleGroup(string name)
     {
-        public ArticleGroup(string name)
-        {
-            Name = name;
-        }
-
-        public ArticleGroup()
-        {
-        }
-
-        public string Name { get; [UsedImplicitly] private set; }
-
-        public int ArticleGroupId { get; [UsedImplicitly] private set; }
+        Name = name;
     }
+
+    public ArticleGroup()
+    {
+    }
+
+    public string Name { get; [UsedImplicitly] private set; }
+
+    public int ArticleGroupId { get; [UsedImplicitly] private set; }
 }

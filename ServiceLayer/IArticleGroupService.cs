@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using DTO.ArticleGroup;
 
-namespace ServiceLayer
+namespace ServiceLayer;
+
+public interface IArticleGroupService
 {
-    public interface IArticleGroupService
-    {
-        ExistingArticleGroupDto CreateArticleGroup(NewArticleGroupDto newArticleGroupDto);
+    ExistingArticleGroupDto CreateArticleGroup(NewArticleGroupDto newArticleGroupDto);
 
-        void DeleteArticleGroup(DeleteArticleGroupDto deleteArticleGroupDto);
+    void DeleteArticleGroup(DeleteArticleGroupDto deleteArticleGroupDto);
 
-        IEnumerable<ExistingArticleGroupDto> GetAllArticleGroups();
-    }
+    IEnumerable<ExistingArticleGroupDto> GetAllArticleGroups();
 }
