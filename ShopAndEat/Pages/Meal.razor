@@ -112,19 +112,19 @@ else
 @if (PurchaseItems.Any())
 {
     <h2>Purchase items</h2>
-    <ul>
+    <div id="purchase-items">
         @foreach (var purchaseItem in PurchaseItems)
         {
             @if (purchaseItem.Unit.Name == "Stück")
             {
-                <li>@purchaseItem.Quantity @purchaseItem.Article.Name</li>
+                <div>@purchaseItem.Quantity @purchaseItem.Article.Name</div>
             }
             else
             {
-                <li>@purchaseItem.Quantity @purchaseItem.Unit.Name @purchaseItem.Article.Name</li>
+                <div>@purchaseItem.Quantity @purchaseItem.Unit.Name @purchaseItem.Article.Name</div>
             }
         }
-    </ul>
+    </div>
 }
 
 
