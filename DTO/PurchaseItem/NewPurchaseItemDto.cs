@@ -17,4 +17,7 @@ public class NewPurchaseItemDto
     public ExistingUnitDto Unit { get; }
 
     public double Quantity { get; }
+
+    /// <inheritdoc />
+    public override string ToString() => Unit.Name == "Stück" ? $"{Quantity} {Article.Name}" : $"{Quantity} {Unit.Name} {Article.Name}";
 }

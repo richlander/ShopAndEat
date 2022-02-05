@@ -112,19 +112,10 @@ else
 @if (PurchaseItems.Any())
 {
     <h2>Purchase items</h2>
-    <div id="purchase-items">
-        @foreach (var purchaseItem in PurchaseItems)
-        {
-            @if (purchaseItem.Unit.Name == "Stück")
-            {
-                <div>@purchaseItem.Quantity @purchaseItem.Article.Name</div>
-            }
-            else
-            {
-                <div>@purchaseItem.Quantity @purchaseItem.Unit.Name @purchaseItem.Article.Name</div>
-            }
-        }
-    </div>
+    @foreach (var purchaseItem in PurchaseItems)
+    {
+        @purchaseItem.ToString()<br/>
+    }
 }
 
 
