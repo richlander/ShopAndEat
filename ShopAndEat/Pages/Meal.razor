@@ -1,16 +1,17 @@
 ﻿@page "/"
 @page "/meal"
+@using ServiceLayer
 @using DTO.Meal
 @using DTO.MealType
 @using DTO.PurchaseItem
 @using DTO.Recipe
 @using DTO.Store
-@using ServiceLayer
 @using ShopAndEat.Models
 @inject IMealService MealService
 @inject IStoreService StoreService
 @inject IRecipeService RecipeService
 @inject IMealTypeService MealTypeService
+@inject IJSRuntime JS
 @* TODO mu88: Build translator *@
 
 <select @onchange="SelectedStoreChanged">
@@ -34,44 +35,48 @@ else
 <table class="table table-striped">
     <caption>Meal plan</caption>
     <thead>
-        <tr>
-            <th scope="col">Day</th>
-            <th scope="col">Time</th>
-            <th scope="col">Recipe</th>
-            <th scope="col">Has been shopped</th>
-            <th scope="col" />
-        </tr>
+    <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Time</th>
+        <th scope="col">Recipe</th>
+        <th scope="col">Has been shopped</th>
+        <th scope="col"/>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var meal in Meals)
+    @foreach (var meal in Meals)
+    {
+        @if (meal.Day.Date == DateTime.Today)
         {
-            @if (meal.Day.Date == DateTime.Today)
-            {
-                <tr style="background-color:#00FF00">
-                    <td>@meal.Day.ToShortDateString() (@meal.Day.ToString("dddd"))</td>
-                    <td>@meal.MealType.Name</td>
-                    <td>@meal.Recipe.Name</td>
-                    <td>@meal.HasBeenShopped</td>
-                    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <td>@meal.Day.ToShortDateString() (@meal.Day.ToString("dddd"))</td>
-                    <td>@meal.MealType.Name</td>
-                    <td>@meal.Recipe.Name</td>
-                    <td>@meal.HasBeenShopped</td>
-                    <td><button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button></td>
-                </tr>
-            }
+            <tr style="background-color:#00FF00">
+                <td>@meal.Day.ToShortDateString() (@meal.Day.ToString("dddd"))</td>
+                <td>@meal.MealType.Name</td>
+                <td>@meal.Recipe.Name</td>
+                <td>@meal.HasBeenShopped</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button>
+                </td>
+            </tr>
         }
+        else
+        {
+            <tr>
+                <td>@meal.Day.ToShortDateString() (@meal.Day.ToString("dddd"))</td>
+                <td>@meal.MealType.Name</td>
+                <td>@meal.Recipe.Name</td>
+                <td>@meal.HasBeenShopped</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button>
+                </td>
+            </tr>
+        }
+    }
     </tbody>
 </table>
 
 <EditForm Model="@_mealModel" OnSubmit="HandleSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
 
     <p>
         <label>
@@ -100,7 +105,7 @@ else
     <p>
         <label>
             Date:
-            <InputDate @bind-Value="_mealModel.Date" />
+            <InputDate @bind-Value="_mealModel.Date"/>
         </label>
     </p>
 
@@ -111,6 +116,7 @@ else
 
 @if (PurchaseItems.Any())
 {
+    <button class="btn btn-primary" @onclick="CopyToClipboardAsync">Copy to clipboard</button>
     <h2>Purchase items</h2>
     @foreach (var purchaseItem in PurchaseItems)
     {
@@ -164,12 +170,19 @@ else
         LoadMeals();
     }
 
+    private async Task CopyToClipboardAsync()
+    {
+        if (!PurchaseItems.Any()) { return; }
+
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", string.Join(Environment.NewLine, PurchaseItems));
+    }
+
     void SelectedStoreChanged(ChangeEventArgs e)
     {
         SelectedStore = Stores.Single(x => x.Name == e.Value.ToString());
     }
 
-    private readonly MealModel _mealModel = new MealModel();
+    private readonly MealModel _mealModel = new();
 
     private void HandleSubmit()
     {
