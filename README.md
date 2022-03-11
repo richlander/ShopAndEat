@@ -1,1 +1,2 @@
-[![codecov](https://codecov.io/gh/mu88/ShopAndEat/branch/main/graph/badge.svg?token=F403UHAWGO)](https://codecov.io/gh/mu88/ShopAndEat)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/829b5703977344ba9b28d8f75545a48e)](https://www.codacy.com/gh/mu88/ShopAndEat/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mu88/ShopAndEat&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/829b5703977344ba9b28d8f75545a48e)](https://www.codacy.com/gh/mu88/ShopAndEat/dashboard?utm_source=github.com&utm_medium=referral&utm_content=mu88/ShopAndEat&utm_campaign=Badge_Coverage)
