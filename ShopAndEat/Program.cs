@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using DataLayer.EF;
 using DataLayer.EfClasses;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ShopAndEat;
 
+[ExcludeFromCodeCoverage]
 public class Program
 {
     public static void Main(string[] args)

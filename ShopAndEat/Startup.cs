@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BizDbAccess;
 using BizDbAccess.Concrete;
 using BizLogic;
@@ -15,6 +16,7 @@ using ServiceLayer.Concrete;
 
 namespace ShopAndEat;
 
+[ExcludeFromCodeCoverage]
 public class Startup
 {
     public Startup(IConfiguration configuration)

@@ -1,0 +1,1 @@
+[![codecov](https://codecov.io/gh/mu88/ShopAndEat/branch/main/graph/badge.svg?token=F403UHAWGO)](https://codecov.io/gh/mu88/ShopAndEat)
