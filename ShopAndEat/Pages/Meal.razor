@@ -141,16 +141,7 @@ else
         SelectedStore = Stores.FirstOrDefault();
     }
 
-    private void LoadMeals()
-    {
-        Meals = MealService.GetFutureMeals().ToList();
-        if (Meals.Any())
-        {
-            _mealModel.MealTypeName = Meals.First().MealType.Name;
-            _mealModel.RecipeName = Meals.First().Recipe.Name;
-            _mealModel.Date = Meals.First().Day;
-        }
-    }
+    private void LoadMeals() => Meals = MealService.GetFutureMeals().ToList();
 
     private IEnumerable<ExistingMealDto> Meals { get; set; }
 
