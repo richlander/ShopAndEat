@@ -11,7 +11,7 @@
 @inject IStoreService StoreService
 @inject IRecipeService RecipeService
 @inject IMealTypeService MealTypeService
-@inject IJSRuntime JS
+@inject IJSRuntime Js
 @* TODO mu88: Build translator *@
 
 <select @onchange="SelectedStoreChanged">
@@ -54,7 +54,7 @@ else
                 <td>@meal.Recipe.Name</td>
                 <td>@meal.HasBeenShopped</td>
                 <td>
-                    <button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button>
+                    <button class="btn btn-primary" @onclick="@(_ => DeleteMeal(meal.MealId))">❌</button>
                 </td>
             </tr>
         }
@@ -66,7 +66,7 @@ else
                 <td>@meal.Recipe.Name</td>
                 <td>@meal.HasBeenShopped</td>
                 <td>
-                    <button class="btn btn-primary" @onclick="@(e => DeleteMeal(meal.MealId))">❌</button>
+                    <button class="btn btn-primary" @onclick="@(_ => DeleteMeal(meal.MealId))">❌</button>
                 </td>
             </tr>
         }
@@ -165,12 +165,12 @@ else
     {
         if (!PurchaseItems.Any()) { return; }
 
-        await JS.InvokeVoidAsync("navigator.clipboard.writeText", string.Join(Environment.NewLine, PurchaseItems));
+        await Js.InvokeVoidAsync("navigator.clipboard.writeText", string.Join(Environment.NewLine, PurchaseItems));
     }
 
     void SelectedStoreChanged(ChangeEventArgs e)
     {
-        SelectedStore = Stores.Single(x => x.Name == e.Value.ToString());
+        SelectedStore = Stores.Single(x => x.Name == e.Value?.ToString());
     }
 
     private readonly MealModel _mealModel = new();
