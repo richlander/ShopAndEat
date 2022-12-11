@@ -36,7 +36,7 @@ public class RecipeService : IRecipeService
             newIngredients.Add(Context.Ingredients.Add(new Ingredient(article, newIngredientDto.Quantity, unit)).Entity);
         }
 
-        var newRecipe = new Recipe(newRecipeDto.Name, newRecipeDto.NumberOfDays, newIngredients);
+        var newRecipe = new Recipe(newRecipeDto.Name, newRecipeDto.NumberOfDays, newRecipeDto.NumberOfPersons, newIngredients);
         Context.Recipes.Add(newRecipe);
         Context.SaveChanges();
     }
@@ -73,6 +73,7 @@ public class RecipeService : IRecipeService
 
         recipe.Name = existingRecipeDto.Name;
         recipe.NumberOfDays = existingRecipeDto.NumberOfDays;
+        recipe.NumberOfPersons = existingRecipeDto.NumberOfPersons;
         recipe.Ingredients = newIngredients;
 
         Context.SaveChanges();

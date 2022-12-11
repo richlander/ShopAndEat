@@ -13,12 +13,13 @@ public class MealTests
     {
         var day = new DateTime();
         var mealType = new MealType("Lunch", 1);
-        var recipe = new Recipe("Soup", 3, new Ingredient[] { });
+        var recipe = new Recipe("Soup", 3, 2, new Ingredient[] { });
 
-        var testee = new Meal(day, mealType, recipe);
+        var testee = new Meal(day, mealType, recipe, 2);
 
         testee.Day.Should().Be(day);
         testee.MealType.Should().Be(mealType);
         testee.Recipe.Should().Be(recipe);
+        testee.NumberOfPersons.Should().Be(2);
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataLayer.EfClasses;
+using DTO.Meal;
 
 namespace BizLogic.Concrete;
 
 public class GetRecipesForMealsAction : IGetRecipesForMealsAction
 {
     /// <inheritdoc />
-    public IEnumerable<Recipe> GetRecipesForMeals(IEnumerable<Meal> meals)
+    public IEnumerable<(Recipe recipe, int numberOfPersons)> GetRecipesForMeals(IEnumerable<Meal> meals)
     {
-        return meals.Select(x => x.Recipe);
+        return meals.Select(x => (x.Recipe, x.NumberOfPersons));
     }
 }

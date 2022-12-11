@@ -6,11 +6,12 @@ namespace DTO.Meal;
 
 public class NewMealDto
 {
-    public NewMealDto(DateTime day, ExistingMealTypeDto mealType, ExistingRecipeDto recipe)
+    public NewMealDto(DateTime day, ExistingMealTypeDto mealType, ExistingRecipeDto recipe, int numberOfPersons)
     {
         Day = day;
         MealType = mealType;
         Recipe = recipe;
+        NumberOfPersons = numberOfPersons;
     }
 
     public DateTime Day { get; }
@@ -18,4 +19,6 @@ public class NewMealDto
     public ExistingMealTypeDto MealType { get; }
 
     public ExistingRecipeDto Recipe { get; }
+    
+    public int NumberOfPersons { get; set; }
 }

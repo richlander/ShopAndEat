@@ -9,4 +9,6 @@ public class RecipeModel
     [Required] public string Name { get; set; }
 
     [Required] public int NumberOfDays { get; set; }
+    
+    [Required] public int NumberOfPersons { get; set; }
 }

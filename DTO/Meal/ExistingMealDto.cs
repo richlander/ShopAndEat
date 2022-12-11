@@ -28,4 +28,6 @@ public class ExistingMealDto
     public int MealId { get; }
 
     public bool HasBeenShopped { get; }
+    
+    public int NumberOfPersons { get; set; }
 }

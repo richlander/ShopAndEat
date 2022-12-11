@@ -18,10 +18,11 @@ public class RecipeTests
             new Ingredient(new Article{Name="Tomato", ArticleGroup = new ArticleGroup("Vegetables"), IsInventory = false}, 3, new Unit("Bag"))
         };
 
-        var testee = new Recipe(name, numberOfDays, ingredients);
+        var testee = new Recipe(name, numberOfDays, 2, ingredients);
 
         testee.Name.Should().Be(name);
         testee.NumberOfDays.Should().Be(numberOfDays);
         testee.Ingredients.Should().BeEquivalentTo(ingredients);
+        testee.NumberOfDays.Should().Be(3);
     }
 }

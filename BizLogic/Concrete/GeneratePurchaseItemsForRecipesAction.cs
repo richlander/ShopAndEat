@@ -7,11 +7,19 @@ namespace BizLogic.Concrete;
 public class GeneratePurchaseItemsForRecipesAction : IGeneratePurchaseItemsForRecipesAction
 {
     /// <inheritdoc />
-    public IEnumerable<PurchaseItem> GeneratePurchaseItems(IEnumerable<Recipe> recipes)
+    public IEnumerable<PurchaseItem> GeneratePurchaseItems(IEnumerable<(Recipe recipe, int numberOfPersons)> recipesAndPersons)
     {
-        return recipes.Select(recipe => recipe.Ingredients)
-            .SelectMany(ingredients => ingredients)
-            .GroupBy(x => new { x.Article, x.Unit })
+        var purchaseItems = new List<PurchaseItem>();
+        foreach (var (recipe, numberOfPerson) in recipesAndPersons)
+        {
+            var personQuantifier = numberOfPerson / recipe.NumberOfPersons;
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                purchaseItems.Add(new PurchaseItem(ingredient.Article, ingredient.Quantity * personQuantifier, ingredient.Unit));
+            }
+        }
+        
+        return purchaseItems.GroupBy(item => new { item.Article, item.Unit })
             .Select(y => new PurchaseItem(y.Key.Article, y.Sum(z => z.Quantity), y.Key.Unit));
     }
 }

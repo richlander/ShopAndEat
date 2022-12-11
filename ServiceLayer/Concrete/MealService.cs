@@ -48,7 +48,7 @@ public class MealService : IMealService
         // TODO mu88: Try to avoid this manual mapping logic
         var recipe = SimpleCrudHelper.Find<Recipe>(newMealDto.Recipe.RecipeId);
         var mealType = SimpleCrudHelper.Find<MealType>(newMealDto.MealType.MealTypeId);
-        var newMeal = new Meal(newMealDto.Day, mealType, recipe);
+        var newMeal = new Meal(newMealDto.Day, mealType, recipe, newMealDto.NumberOfPersons);
         var createdMeal = Context.Meals.Add(newMeal);
         Context.SaveChanges();
 
@@ -77,21 +77,6 @@ public class MealService : IMealService
         }
 
         return results.OrderBy(x => x.Day).ThenBy(x => x.MealType.Order);
-    }
-
-    /// <inheritdoc />
-    public IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(IEnumerable<ExistingRecipeDto> existingRecipeDtos,
-                                                                   ExistingStoreDto existingStoreDto)
-    {
-        var recipes = SimpleCrudHelper.FindMany<Recipe>(existingRecipeDtos.Select(x => x.RecipeId));
-        var store = SimpleCrudHelper.Find<Store>(existingStoreDto.StoreId);
-
-        var orderedPurchaseItemsByStore =
-            OrderPurchaseItemsByStoreAction.OrderPurchaseItemsByStore(store,
-                                                                      GeneratePurchaseItemsForRecipesAction
-                                                                          .GeneratePurchaseItems(recipes));
-
-        return Mapper.Map<IEnumerable<NewPurchaseItemDto>>(orderedPurchaseItemsByStore);
     }
 
     /// <inheritdoc />

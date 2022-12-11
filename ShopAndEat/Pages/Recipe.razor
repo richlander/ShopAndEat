@@ -47,6 +47,12 @@
         </label>
     </p>
     <p>
+        <label>
+            Number of Persons:
+            <InputNumber @bind-Value="_recipeModel.NumberOfPersons" />
+        </label>
+    </p>
+    <p>
         Ingredients:
         <table>
             <tr>
@@ -140,7 +146,7 @@
                     Units.Single(x => x.UnitId == SelectedUnitIds[i])));
             }
 
-            var newRecipe = new NewRecipeDto(_recipeModel.Name, _recipeModel.NumberOfDays, ingredients);
+            var newRecipe = new NewRecipeDto(_recipeModel.Name, _recipeModel.NumberOfDays, _recipeModel.NumberOfPersons, ingredients);
             RecipeService.CreateNewRecipe(newRecipe);
         }
         else
@@ -154,7 +160,7 @@
                     Units.Single(x => x.UnitId == SelectedUnitIds[i])));
             }
 
-            var updatedRecipe = new UpdateRecipeDto(_recipeModel.Name, _recipeModel.NumberOfDays, ingredients, _recipeModel.RecipeId);
+            var updatedRecipe = new UpdateRecipeDto(_recipeModel.Name, _recipeModel.NumberOfDays, _recipeModel.NumberOfPersons, ingredients, _recipeModel.RecipeId);
             RecipeService.UpdateRecipe(updatedRecipe);
         }
 
@@ -187,6 +193,7 @@
         var recipe = Recipes.Single(x => x.RecipeId == recipeId);
         _recipeModel.Name = recipe.Name;
         _recipeModel.NumberOfDays = recipe.NumberOfDays;
+        _recipeModel.NumberOfPersons = recipe.NumberOfPersons;
         SelectedArticleIds = recipe.Ingredients.Select(x => x.Article).Select(x => x.ArticleId).ToList();
         SelectedQuantities = recipe.Ingredients.Select(x => x.Quantity).ToList();
         SelectedUnitIds = recipe.Ingredients.Select(x => x.Unit).Select(x => x.UnitId).ToList();

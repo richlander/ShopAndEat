@@ -40,6 +40,7 @@ else
         <th scope="col">Time</th>
         <th scope="col">Recipe</th>
         <th scope="col">Has been shopped</th>
+        <th scope="col">Number of persons</th>
         <th scope="col"/>
         <th scope="col"/>
     </tr>
@@ -54,6 +55,7 @@ else
                 <td>@meal.MealType.Name</td>
                 <td>@meal.Recipe.Name</td>
                 <td>@meal.HasBeenShopped</td>
+                <td>@meal.NumberOfPersons</td>
                 <td>
                     <button class="btn btn-primary" @onclick="@(_ => DeleteMeal(meal.MealId))">❌</button>
                 </td>
@@ -69,6 +71,7 @@ else
                 <td>@meal.MealType.Name</td>
                 <td>@meal.Recipe.Name</td>
                 <td>@meal.HasBeenShopped</td>
+                <td>@meal.NumberOfPersons</td>
                 <td>
                     <button class="btn btn-primary" @onclick="@(_ => DeleteMeal(meal.MealId))">❌</button>
                 </td>
@@ -88,13 +91,13 @@ else
     <p>
         <label>
             Recipe:
-            <InputSelect @bind-Value="_mealModel.RecipeName">
+            <select @onchange="SelectedRecipeChanged">
                 <option>Choose Recipe...</option>
                 @foreach (var recipe in Recipes.OrderBy(x => x.Name))
                 {
                     <option value="@recipe.Name">@recipe.Name</option>
                 }
-            </InputSelect>
+            </select>
         </label>
     </p>
     <p>
@@ -113,6 +116,12 @@ else
         <label>
             Date:
             <InputDate @bind-Value="_mealModel.Date"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Number of Persons:
+            <InputNumber @bind-Value="_mealModel.NumberOfPersons" />
         </label>
     </p>
 
@@ -186,7 +195,8 @@ else
     {
         var newMeal = new NewMealDto(_mealModel.Date,
             MealTypes.Single(x => x.Name == _mealModel.MealTypeName),
-            Recipes.Single(x => x.Name == _mealModel.RecipeName));
+            Recipes.Single(x => x.Name == _mealModel.RecipeName),
+            _mealModel.NumberOfPersons);
         MealService.CreateMeal(newMeal);
         LoadMeals();
     }
@@ -202,4 +212,15 @@ else
         MealService.ToggleMeal(mealId);
         LoadMeals();
     }
+
+    private void SelectedRecipeChanged(ChangeEventArgs e)
+    {
+        if (e.Value is string recipeName)
+        {
+            _mealModel.NumberOfPersons = Recipes.Single(recipe => recipe.Name == recipeName).NumberOfPersons;
+            _mealModel.RecipeName = recipeName;
+            StateHasChanged();
+        }
+    }
+
 }
