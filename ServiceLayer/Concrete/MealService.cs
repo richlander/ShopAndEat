@@ -126,6 +126,14 @@ public class MealService : IMealService
         Context.SaveChanges();
     }
 
+    /// <inheritdoc />
+    public void ToggleMeal(int mealId)
+    {
+        var meal = SimpleCrudHelper.Find<Meal>(mealId);
+        meal.HasBeenShopped = !meal.HasBeenShopped;
+        Context.SaveChanges();
+    }
+
     private bool IsInFuture(DateTime mealDate)
     {
         // only compare year, month and day - we don't need hours and minutes

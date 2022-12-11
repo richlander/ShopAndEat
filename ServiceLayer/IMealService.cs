@@ -17,4 +17,6 @@ public interface IMealService
     IEnumerable<NewPurchaseItemDto> GetOrderedPurchaseItems(ExistingStoreDto store);
 
     void DeleteMeal(DeleteMealDto mealToDelete);
+
+    void ToggleMeal(int mealId);
 }

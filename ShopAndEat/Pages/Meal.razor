@@ -41,6 +41,7 @@ else
         <th scope="col">Recipe</th>
         <th scope="col">Has been shopped</th>
         <th scope="col"/>
+        <th scope="col"/>
     </tr>
     </thead>
     <tbody>
@@ -56,6 +57,9 @@ else
                 <td>
                     <button class="btn btn-primary" @onclick="@(_ => DeleteMeal(meal.MealId))">❌</button>
                 </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(_ => Toggle(meal.MealId))">🔃</button>
+                </td>
             </tr>
         }
         else
@@ -67,6 +71,9 @@ else
                 <td>@meal.HasBeenShopped</td>
                 <td>
                     <button class="btn btn-primary" @onclick="@(_ => DeleteMeal(meal.MealId))">❌</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(_ => Toggle(meal.MealId))">🔃</button>
                 </td>
             </tr>
         }
@@ -189,5 +196,10 @@ else
         MealService.DeleteMeal(new DeleteMealDto(mealId));
         LoadMeals();
     }
-
+    
+    private void Toggle(int mealId)
+    {
+        MealService.ToggleMeal(mealId);
+        LoadMeals();
+    }
 }
