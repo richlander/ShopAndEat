@@ -67,7 +67,7 @@ public class MealService : IMealService
             {
                 for (var i = 0; i < meal.Recipe.NumberOfDays; i++)
                 {
-                    results.Add(new ExistingMealDto(meal.Day.AddDays(i), meal.MealType, meal.Recipe, meal.MealId, meal.HasBeenShopped));
+                    results.Add(new ExistingMealDto(meal.Day.AddDays(i), meal.MealType, meal.Recipe, meal.MealId, meal.HasBeenShopped, meal.NumberOfPersons));
                 }
             }
             else
