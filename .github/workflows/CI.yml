@@ -29,8 +29,8 @@ jobs:
           dotnet-coverage collect 'dotnet test --no-build' -f xml -o 'coverage.xml'
       - name: End Sonar scan
         run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to DockerHub
@@ -43,5 +43,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: false
+          platforms: linux/arm64
           tags: mu88/shopandeat:latest
           file: ShopAndEat/Dockerfile
