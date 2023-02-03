@@ -35,7 +35,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          platforms: linux/arm64
           tags: |
             mu88/shopandeat:latest
             mu88/shopandeat:${{ github.ref_name }}
