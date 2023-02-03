@@ -15,13 +15,13 @@ COPY ["ServiceLayer/ServiceLayer.csproj", "ServiceLayer/"]
 COPY ["DTO/DTO.csproj", "DTO/"]
 COPY ["BizLogic/BizLogic.csproj", "BizLogic/"]
 
-RUN dotnet restore "ShopAndEat/ShopAndEat.csproj"
+RUN dotnet restore "ShopAndEat/ShopAndEat.csproj" -r linux-arm64
 COPY . .
 WORKDIR "/src/ShopAndEat"
-RUN dotnet build "ShopAndEat.csproj" -c Release
+RUN dotnet build "ShopAndEat.csproj" -c Release -r linux-arm64 --self-contained false
 
 FROM build AS publish
-RUN dotnet publish "ShopAndEat.csproj" -c Release -o /app
+RUN dotnet publish "ShopAndEat.csproj" -c Release -r linux-arm64  --self-contained false -o /app
 
 FROM base AS final
 WORKDIR /app
